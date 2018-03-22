@@ -18,7 +18,11 @@ ser = serial.Serial(
 
 
 while 1:
-   ser.write('90,low,15.6,125*')
+   data = '90,low,15.6,125*'
+   ser.write(data)
+   print data
+   
+   time.sleep(1)
    '''
    print 'hello'
    time.sleep(5)
