@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/pi/Desktop/AprilTags2/example/Serial.cpp
+/Users/tristanschuler/Desktop/AprilTags/example/Serial.cpp
 fcntl.h
 -
 termios.h
@@ -20,13 +20,13 @@ sstream
 unistd.h
 -
 Serial.h
-/home/pi/Desktop/AprilTags2/example/Serial.h
+/Users/tristanschuler/Desktop/AprilTags/example/Serial.h
 
-/home/pi/Desktop/AprilTags2/example/Serial.h
+/Users/tristanschuler/Desktop/AprilTags/example/Serial.h
 string
 -
 
-/home/pi/Desktop/AprilTags2/example/SerialTest.cpp
+/Users/tristanschuler/Desktop/AprilTags/example/SerialTest.cpp
 termios.h
 -
 fcntl.h

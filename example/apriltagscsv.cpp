@@ -766,7 +766,7 @@ public:
 		for (list<string>::iterator it = m_imgNames.begin(); it != m_imgNames.end(); it++) {
 			image = cv::imread(*it); // load image with opencv
 			processImage(image, image_gray);
-			while (cv::waitKey(100) == -1) {}
+			while (cvWaitKey(100) == -1) {}
 		}
 	}
 
@@ -809,7 +809,7 @@ public:
 			}
 
 			// exit if any key is pressed
-			if (cv::waitKey(1) >= 0) break;
+			if (cvWaitKey(10) >= 0) break;
 		}
 	}
 

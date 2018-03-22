@@ -1,4 +1,4 @@
-prefix=/home/pi/Desktop/AprilTags2/build
+prefix=/Users/tristanschuler/Desktop/AprilTags/build
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

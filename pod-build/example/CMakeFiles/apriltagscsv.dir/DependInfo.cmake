@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/pi/Desktop/AprilTags2/example/Serial.cpp" "/home/pi/Desktop/AprilTags2/pod-build/example/CMakeFiles/apriltagscsv.dir/Serial.cpp.o"
-  "/home/pi/Desktop/AprilTags2/example/apriltagscsv.cpp" "/home/pi/Desktop/AprilTags2/pod-build/example/CMakeFiles/apriltagscsv.dir/apriltagscsv.cpp.o"
+  "/Users/tristanschuler/Desktop/AprilTags/example/Serial.cpp" "/Users/tristanschuler/Desktop/AprilTags/pod-build/example/CMakeFiles/apriltagscsv.dir/Serial.cpp.o"
+  "/Users/tristanschuler/Desktop/AprilTags/example/apriltagscsv.cpp" "/Users/tristanschuler/Desktop/AprilTags/pod-build/example/CMakeFiles/apriltagscsv.dir/apriltagscsv.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "GNU")
+set(CMAKE_CXX_COMPILER_ID "Clang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
@@ -16,13 +16,13 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../AprilTags"
   "../."
   "/opt/local/include"
-  "/usr/include/opencv"
-  "/usr/include/eigen3"
+  "/opt/local/include/opencv"
+  "/opt/local/include/eigen3"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/pi/Desktop/AprilTags2/pod-build/CMakeFiles/apriltags.dir/DependInfo.cmake"
+  "/Users/tristanschuler/Desktop/AprilTags/pod-build/CMakeFiles/apriltags.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

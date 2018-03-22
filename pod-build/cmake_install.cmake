@@ -1,8 +1,8 @@
-# Install script for directory: /home/pi/Desktop/AprilTags2
+# Install script for directory: /Users/tristanschuler/Desktop/AprilTags
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/pi/Desktop/AprilTags2/build")
+  set(CMAKE_INSTALL_PREFIX "/Users/tristanschuler/Desktop/AprilTags/build")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -27,51 +27,50 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
-# Install shared libraries without execute permission?
-if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
-  set(CMAKE_INSTALL_SO_NO_EXE "1")
-endif()
-
 if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/pi/Desktop/AprilTags2/pod-build/lib/libapriltags.a")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/Users/tristanschuler/Desktop/AprilTags/pod-build/lib/libapriltags.a")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libapriltags.a" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libapriltags.a")
+    execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libapriltags.a")
+  endif()
 endif()
 
 if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/AprilTags" TYPE FILE FILES
-    "/home/pi/Desktop/AprilTags2/AprilTags/Edge.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/FloatImage.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/GLine2D.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/GLineSegment2D.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/Gaussian.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/GrayModel.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/Gridder.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/Homography33.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/MathUtil.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/Quad.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/Segment.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/Tag16h5.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/Tag16h5_other.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/Tag25h7.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/Tag25h9.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/Tag36h11.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/Tag36h11_other.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/Tag36h9.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/TagDetection.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/TagDetector.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/TagFamily.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/UnionFindSimple.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/XYWeight.h"
-    "/home/pi/Desktop/AprilTags2/AprilTags/pch.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/Edge.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/FloatImage.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/GLine2D.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/GLineSegment2D.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/Gaussian.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/GrayModel.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/Gridder.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/Homography33.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/MathUtil.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/Quad.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/Segment.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/Tag16h5.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/Tag16h5_other.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/Tag25h7.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/Tag25h9.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/Tag36h11.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/Tag36h11_other.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/Tag36h9.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/TagDetection.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/TagDetector.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/TagFamily.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/UnionFindSimple.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/XYWeight.h"
+    "/Users/tristanschuler/Desktop/AprilTags/AprilTags/pch.h"
     )
 endif()
 
 if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/pi/Desktop/AprilTags2/pod-build/lib/pkgconfig/apriltags.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/Users/tristanschuler/Desktop/AprilTags/pod-build/lib/pkgconfig/apriltags.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/pi/Desktop/AprilTags2/pod-build/example/cmake_install.cmake")
+  include("/Users/tristanschuler/Desktop/AprilTags/pod-build/example/cmake_install.cmake")
 
 endif()
 
@@ -83,5 +82,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/pi/Desktop/AprilTags2/pod-build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/tristanschuler/Desktop/AprilTags/pod-build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
