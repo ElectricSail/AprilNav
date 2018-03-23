@@ -1,6 +1,9 @@
-[![license](https://img.shields.io/badge/license-LGPL2.1%202.0-blue.svg)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html)
 
-AprilTags library
+[![license](https://img.shields.io/badge/license-LGPL%202.1-blue.svg)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html)
+
+#AprilTags library
+
+##Overview
 
 Detect April tags (2D bar codes) in images; reports unique ID of each
 detection, and optionally its position and orientation relative to a
@@ -22,7 +25,7 @@ http://sourceforge.net/p/pods/
 Michael Kaess
 October 2012
 
-----------------------------
+##Project History
 
 AprilTags were developed by Professor Edwin Olson of the University of
 Michigan.  His Java implementation is available on this web site:
