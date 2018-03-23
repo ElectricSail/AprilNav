@@ -39,6 +39,9 @@ void Serial::open(const string& port, int rate) {
   case(38400):
     b = B38400;
     break;
+  case(57600):
+    b = B57600;
+    break;
   case(115200):
     b = B115200;
     break;

@@ -2,7 +2,7 @@
 #include <string.h>
 #include <iostream>
 
-char serialPortFilename[] = "/dev/ttyUSB0";
+char serialPortFilename[] = "/dev/ttyACM0";
 
 using namespace std;
 

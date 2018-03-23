@@ -13,6 +13,9 @@ pods_install_executables(imu)
 add_executable(apriltagscsv apriltagscsv.cpp Serial.cpp)
 pods_install_executables(apriltagscsv)
 
+add_executable(apriltagscsv_test apriltagscsv_test.cpp Serial.cpp)
+pods_install_executables(apriltagscsv_test)
+
 add_executable(VideoTest VideoTest.cpp Serial.cpp)
 pods_install_executables(VideoTest)
 
