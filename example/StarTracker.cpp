@@ -495,7 +495,7 @@ public:
 		}
 
 		// optional: prepare serial port for communication with Arduino
-		if (m_arduino) {S
+		if (m_arduino) {
 			//m_serial.open("/dev/ttyACM0", 57600);
 			m_serial.open("/dev/ttyUSB0", 57600);
 		}
@@ -724,7 +724,7 @@ public:
 		//string for serial communication between pi and arduino
 		write_string = to_string_with_precision(OPTIMIZED_X) + "," + to_string_with_precision(OPTIMIZED_Y) + "," + to_string_with_precision(OPTIMIZED_PITCH) + "," + 
 			to_string_with_precision(OPTIMIZED_ROLL) + "," + to_string_with_precision(OPTIMIZED_YAW) + "," + to_string_with_precision(delta_x/delta_t) + "," + 
-			to_string_with_precision(delta_y/delta_t) + "," + to_string_with_precision(velmag) + "," + to_string_with_precision(veltheta);
+			to_string_with_precision(delta_y/delta_t) + "," + to_string_with_precision(velmag) + "," + to_string_with_precision(veltheta) +"*";
 
 		}
 
@@ -775,15 +775,16 @@ public:
 				m_serial.print(translation(1));
 				m_serial.print(",");
 				m_serial.print(translation(2));
-				m_serial.print("\n");
+				m_serial.print("*");
 				*/
 				m_serial.print(write_string);
-				m_serial.print("\n");
+				//m_serial.print("\n");
 				
 			}
 			else {
 				// no tag detected: tag ID = -1
-				m_serial.print("-1,0.0,0.0,0.0\n");
+				//m_serial.print("NO INFO,NO INFO,NO INFO,NO INFO,NO INFO,NO INfo,NO INFO,NO INFO,NO INfo*");
+				m_serial.print("^");
 			}
 		}
 	}
@@ -863,7 +864,7 @@ int main(int argc, char* argv[]) {
 	//string filename = to_string(tm.tm_year + 1900);
 	string TOD = to_string(tm.tm_mon + 1) + "-"
 		+ to_string(tm.tm_mday) + "-" + to_string(tm.tm_year + 1900) + "-" + to_string(tm.tm_hour)
-		+ ":" + to_string(tm.tm_min) + ":" + to_string(tm.tm_sec);
+		+ "_" + to_string(tm.tm_min) + "_" + to_string(tm.tm_sec);
 
 	cout << "Current TOD: " << TOD << endl;
 

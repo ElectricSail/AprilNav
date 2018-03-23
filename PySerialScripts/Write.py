@@ -8,7 +8,7 @@ import serial
 ser = serial.Serial(
   
    port='/dev/ttyUSB0',
-   baudrate = 115200,
+   baudrate = 57600,
    parity=serial.PARITY_NONE,
    stopbits=serial.STOPBITS_ONE,
    bytesize=serial.EIGHTBITS,
@@ -18,7 +18,7 @@ ser = serial.Serial(
 
 
 while 1:
-   data = '90,low,15.6,125*\n'
+   data = '90,low,15.6,125*'
    ser.write(data)
    print data
    
