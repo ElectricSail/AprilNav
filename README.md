@@ -24,6 +24,32 @@ http://sourceforge.net/p/pods/
 Michael Kaess
 October 2012
 
+### Prerequisites
+
+Install the following dependencies to run the program (The following was tested on Ubuntu 12.04 and Raspberry Pi running Raspian: 
+
+```
+sudo apt-get install subversion cmake libopencv-dev libeigen3-dev libv4l-dev
+```
+
+This program has also sucessfully ran on Mac OS but requires homebrew to install the propper packages. 
+
+### Installing
+
+Once installed, navigate to the directory and compile with:
+
+```
+make
+```
+
+After compiling, run with:
+
+```
+./build/bin/StarTracker
+```
+
+End with an example of getting some data out of the system or using it for a little demo
+
 ## Project History
 
 AprilTags were developed by Professor Edwin Olson of the University of
