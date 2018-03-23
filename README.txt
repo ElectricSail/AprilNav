@@ -1,4 +1,4 @@
-[![license](https://img.shields.io/badge/license-LGPL 2.1%202.0-blue.svg)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html)
+[![license](https://img.shields.io/badge/license-LGPL2.1%202.0-blue.svg)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html)
 
 AprilTags library
 
