@@ -32,7 +32,7 @@ Install the following dependencies to run the program (The following was tested 
 sudo apt-get install subversion cmake libopencv-dev libeigen3-dev libv4l-dev
 ```
 
-This program has also sucessfully ran on Mac OS but requires homebrew to install the propper packages. 
+This program has also sucessfully ran on Mac OS but requires homebrew to install the proper packages. 
 
 ### Installing
 
@@ -47,8 +47,6 @@ After compiling, run with:
 ```
 ./build/bin/StarTracker
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Project History
 
