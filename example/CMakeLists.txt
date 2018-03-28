@@ -16,6 +16,9 @@ pods_install_executables(apriltagscsv)
 add_executable(StarTracker StarTracker.cpp Serial.cpp)
 pods_install_executables(StarTracker)
 
+add_executable(StarTracker_testtags StarTracker_testtags.cpp Serial.cpp)
+pods_install_executables(StarTracker_testtags)
+
 add_executable(VideoTest VideoTest.cpp Serial.cpp)
 pods_install_executables(VideoTest)
 
