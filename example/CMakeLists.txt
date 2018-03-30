@@ -24,3 +24,6 @@ pods_install_executables(VideoTest)
 
 add_executable(SerialTest SerialTest.cpp Serial.cpp)
 pods_install_executables(SerialTest)
+
+add_executable(ATStripped ATStripped.cpp Serial.cpp)
+pods_install_executables(ATStripped)
