@@ -33,4 +33,6 @@ pods_install_pkg_config_file(apriltags
     REQUIRES eigen3 opencv2
     VERSION 1.0.0)
 
+add_subdirectory(StarTracker)
 add_subdirectory(example)
+
