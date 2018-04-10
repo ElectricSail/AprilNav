@@ -5,11 +5,13 @@ TITLE="System Information for $HOSTNAME:"
 RIGHT_NOW=$(date +"%x %r %Z")
 TIME_STAMP="Updated on $RIGHT_NOW by $USER"
 
+COMMAND="tail -f output.txt"
+
 echo $TITLE
 echo $RIGHT_NOW
 echo $TIME_STAMP
 echo
-
+echo -ne "\033]0;APRIL TAGS MAIN\007"
 doubleterminal=false
 
 
@@ -34,7 +36,9 @@ while [ "$1" != "" ]; do
       doubleterminal=true
       echo -e "\e[96m Double Terminal Activated \e[97m"
       if [ "$doubleterminal" = true ]; then
-        echo "ADKHAKGHAGSASGASGSAGASG"
+        #gnome-terminal -e 'tail -f output.txt'
+        gnome-terminal -e 'rainbow --cyan="Time*" --yellow="Tags detected:*" --blink="Vel*" tail -f output.txt'
+        ./build/bin/StarTracker -S .401 -X Calibration/BlackCamera.txt -s
       fi
     else
       echo -e "\033[31m $1 is Not an accepted argument, -h for accepted options \e[97m"
@@ -46,4 +50,6 @@ while [ "$1" != "" ]; do
 done
 
 
-./build/bin/StarTracker -S .401 -X Calibration/BlackCamera.txt
+
+
+#tail -f output.txt | sed --unbuffered     -e "s/\(.*Time:*\)/\o033[96m\1\o033[39m/"     -e "s/\(.*Tags detected.*\)/\o033[93m\1\o033[39m/"

@@ -1,0 +1,788 @@
+Time: 0.117
+Time: 0.194
+Time: 0.275
+Time: 0.347
+Time: 0.421
+Time: 0.527
+Time: 0.650
+Time: 0.769
+Time: 0.887
+Time: 0.999
+Time: 1.122
+Time: 1.240
+Time: 1.392
+Time: 1.505
+Time: 1.632
+Time: 1.754
+Time: 1.878
+Time: 2.001
+Time: 2.119
+Time: 2.251
+Time: 2.379
+ Tags detected:1
+ OPTIMIZED X: 3.998 OPTIMIZED_Y: 1.035
+ OPTIMIZED_PITCH: -9.583 OPTIMIZED_ROLL: 10.410 OPTIMIZED_YAW: 96.670
+ Velocity_X: 1.680 Velocity_Y: 0.435
+ Velocity_Mag: 1.736 Velocity_theta: 345.489 Angular Velocity40.627
+
+Time: 2.495
+ Tags detected:1
+ OPTIMIZED X: 4.025 OPTIMIZED_Y: 1.043
+ OPTIMIZED_PITCH: 2.359 OPTIMIZED_ROLL: 10.408 OPTIMIZED_YAW: 96.433
+ Velocity_X: 0.229 Velocity_Y: 0.074
+ Velocity_Mag: 0.240 Velocity_theta: 342.167 Angular Velocity-2.048
+
+Time: 2.607
+ Tags detected:1
+ OPTIMIZED X: 4.023 OPTIMIZED_Y: 1.040
+ OPTIMIZED_PITCH: -4.004 OPTIMIZED_ROLL: 8.561 OPTIMIZED_YAW: 96.587
+ Velocity_X: -0.013 Velocity_Y: -0.032
+ Velocity_Mag: 0.035 Velocity_theta: 111.777 Angular Velocity1.374
+
+Time: 2.744
+ Tags detected:1
+ OPTIMIZED X: 4.026 OPTIMIZED_Y: 1.020
+ OPTIMIZED_PITCH: -7.636 OPTIMIZED_ROLL: 8.476 OPTIMIZED_YAW: 97.359
+ Velocity_X: 0.020 Velocity_Y: -0.143
+ Velocity_Mag: 0.145 Velocity_theta: 188.134 Angular Velocity5.641
+
+Time: 2.875
+ Tags detected:1
+ OPTIMIZED X: 4.032 OPTIMIZED_Y: 1.010
+ OPTIMIZED_PITCH: -12.126 OPTIMIZED_ROLL: 6.267 OPTIMIZED_YAW: 98.221
+ Velocity_X: 0.043 Velocity_Y: -0.075
+ Velocity_Mag: 0.086 Velocity_theta: 210.212 Angular Velocity6.625
+
+Time: 3.003
+ Tags detected:1
+ OPTIMIZED X: 4.028 OPTIMIZED_Y: 1.012
+ OPTIMIZED_PITCH: -9.105 OPTIMIZED_ROLL: 8.091 OPTIMIZED_YAW: 97.805
+ Velocity_X: -0.029 Velocity_Y: 0.015
+ Velocity_Mag: 0.033 Velocity_theta: 62.224 Angular Velocity-3.239
+
+Time: 3.121
+ Tags detected:1
+ OPTIMIZED X: 4.028 OPTIMIZED_Y: 1.014
+ OPTIMIZED_PITCH: -7.684 OPTIMIZED_ROLL: 8.762 OPTIMIZED_YAW: 97.857
+ Velocity_X: 0.003 Velocity_Y: 0.009
+ Velocity_Mag: 0.010 Velocity_theta: 289.269 Angular Velocity0.435
+
+Time: 3.248
+ Tags detected:1
+ OPTIMIZED X: 4.028 OPTIMIZED_Y: 1.014
+ OPTIMIZED_PITCH: -6.507 OPTIMIZED_ROLL: 9.161 OPTIMIZED_YAW: 97.790
+ Velocity_X: -0.002 Velocity_Y: 0.007
+ Velocity_Mag: 0.008 Velocity_theta: 13.151 Angular Velocity-0.529
+
+Time: 3.371
+ Tags detected:1
+ OPTIMIZED X: 4.030 OPTIMIZED_Y: 1.015
+ OPTIMIZED_PITCH: -7.306 OPTIMIZED_ROLL: 8.846 OPTIMIZED_YAW: 98.008
+ Velocity_X: 0.012 Velocity_Y: 0.003
+ Velocity_Mag: 0.012 Velocity_theta: 348.039 Angular Velocity1.778
+
+Time: 3.499
+ Tags detected:1
+ OPTIMIZED X: 4.026 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -2.616 OPTIMIZED_ROLL: 10.669 OPTIMIZED_YAW: 97.462
+ Velocity_X: -0.031 Velocity_Y: 0.018
+ Velocity_Mag: 0.036 Velocity_theta: 60.333 Angular Velocity-4.249
+
+Time: 3.619
+ Tags detected:1
+ OPTIMIZED X: 4.029 OPTIMIZED_Y: 1.015
+ OPTIMIZED_PITCH: -7.456 OPTIMIZED_ROLL: 8.581 OPTIMIZED_YAW: 98.030
+ Velocity_X: 0.031 Velocity_Y: -0.015
+ Velocity_Mag: 0.034 Velocity_theta: 244.207 Angular Velocity4.738
+
+Time: 3.761
+Time: 3.889
+ Tags detected:1
+ OPTIMIZED X: 4.029 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -6.197 OPTIMIZED_ROLL: 9.180 OPTIMIZED_YAW: 97.969
+ Velocity_X: -0.000 Velocity_Y: 0.001
+ Velocity_Mag: 0.001 Velocity_theta: 19.858 Angular Velocity-0.225
+
+Time: 4.031
+ Tags detected:1
+ OPTIMIZED X: 4.030 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -8.288 OPTIMIZED_ROLL: 8.054 OPTIMIZED_YAW: 98.092
+ Velocity_X: 0.004 Velocity_Y: 0.002
+ Velocity_Mag: 0.004 Velocity_theta: 335.130 Angular Velocity0.865
+
+Time: 4.155
+ Tags detected:1
+ OPTIMIZED X: 4.030 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -7.390 OPTIMIZED_ROLL: 8.515 OPTIMIZED_YAW: 98.064
+ Velocity_X: 0.004 Velocity_Y: -0.001
+ Velocity_Mag: 0.005 Velocity_theta: 261.756 Angular Velocity-0.227
+
+Time: 4.276
+ Tags detected:1
+ OPTIMIZED X: 4.029 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -6.828 OPTIMIZED_ROLL: 9.298 OPTIMIZED_YAW: 97.911
+ Velocity_X: -0.014 Velocity_Y: 0.012
+ Velocity_Mag: 0.019 Velocity_theta: 49.608 Angular Velocity-1.266
+
+Time: 4.395
+Time: 4.523
+ Tags detected:1
+ OPTIMIZED X: 4.028 OPTIMIZED_Y: 1.018
+ OPTIMIZED_PITCH: -6.554 OPTIMIZED_ROLL: 9.595 OPTIMIZED_YAW: 97.850
+ Velocity_X: -0.001 Velocity_Y: 0.004
+ Velocity_Mag: 0.004 Velocity_theta: 12.494 Angular Velocity-0.245
+
+Time: 4.658
+ Tags detected:1
+ OPTIMIZED X: 4.030 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -8.467 OPTIMIZED_ROLL: 7.805 OPTIMIZED_YAW: 98.130
+ Velocity_X: 0.014 Velocity_Y: -0.011
+ Velocity_Mag: 0.018 Velocity_theta: 233.761 Angular Velocity2.075
+
+Time: 4.781
+ Tags detected:1
+ OPTIMIZED X: 4.029 OPTIMIZED_Y: 1.018
+ OPTIMIZED_PITCH: -7.339 OPTIMIZED_ROLL: 8.348 OPTIMIZED_YAW: 97.983
+ Velocity_X: -0.008 Velocity_Y: 0.010
+ Velocity_Mag: 0.012 Velocity_theta: 38.423 Angular Velocity-1.200
+
+Time: 4.898
+ Tags detected:1
+ OPTIMIZED X: 4.030 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -7.570 OPTIMIZED_ROLL: 8.165 OPTIMIZED_YAW: 98.066
+ Velocity_X: 0.007 Velocity_Y: -0.006
+ Velocity_Mag: 0.009 Velocity_theta: 232.246 Angular Velocity0.709
+
+Time: 5.033
+ Tags detected:1
+ OPTIMIZED X: 4.029 OPTIMIZED_Y: 1.018
+ OPTIMIZED_PITCH: -7.240 OPTIMIZED_ROLL: 8.180 OPTIMIZED_YAW: 97.979
+ Velocity_X: -0.012 Velocity_Y: 0.003
+ Velocity_Mag: 0.012 Velocity_theta: 74.042 Angular Velocity-0.642
+
+Time: 5.153
+ Tags detected:1
+ OPTIMIZED X: 4.030 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -8.201 OPTIMIZED_ROLL: 7.851 OPTIMIZED_YAW: 98.092
+ Velocity_X: 0.014 Velocity_Y: -0.004
+ Velocity_Mag: 0.014 Velocity_theta: 253.923 Angular Velocity0.938
+
+Time: 5.277
+ Tags detected:1
+ OPTIMIZED X: 4.030 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -8.741 OPTIMIZED_ROLL: 7.581 OPTIMIZED_YAW: 98.092
+ Velocity_X: -0.001 Velocity_Y: 0.000
+ Velocity_Mag: 0.001 Velocity_theta: 89.696 Angular Velocity-0.001
+
+Time: 5.398
+ Tags detected:1
+ OPTIMIZED X: 4.030 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -7.897 OPTIMIZED_ROLL: 8.033 OPTIMIZED_YAW: 98.074
+ Velocity_X: 0.001 Velocity_Y: 0.001
+ Velocity_Mag: 0.001 Velocity_theta: 317.636 Angular Velocity-0.150
+
+Time: 5.515
+ Tags detected:1
+ OPTIMIZED X: 4.031 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -8.391 OPTIMIZED_ROLL: 7.787 OPTIMIZED_YAW: 98.148
+ Velocity_X: 0.006 Velocity_Y: -0.008
+ Velocity_Mag: 0.010 Velocity_theta: 219.159 Angular Velocity0.639
+
+Time: 5.633
+ Tags detected:1
+ OPTIMIZED X: 4.031 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -9.428 OPTIMIZED_ROLL: 7.219 OPTIMIZED_YAW: 98.245
+ Velocity_X: 0.004 Velocity_Y: -0.006
+ Velocity_Mag: 0.007 Velocity_theta: 216.332 Angular Velocity0.816
+
+Time: 5.749
+ Tags detected:1
+ OPTIMIZED X: 4.032 OPTIMIZED_Y: 1.015
+ OPTIMIZED_PITCH: -8.920 OPTIMIZED_ROLL: 7.504 OPTIMIZED_YAW: 98.292
+ Velocity_X: 0.006 Velocity_Y: -0.005
+ Velocity_Mag: 0.008 Velocity_theta: 230.862 Angular Velocity0.412
+
+Time: 5.884
+ Tags detected:1
+ OPTIMIZED X: 4.031 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -8.682 OPTIMIZED_ROLL: 7.637 OPTIMIZED_YAW: 98.208
+ Velocity_X: -0.006 Velocity_Y: 0.009
+ Velocity_Mag: 0.010 Velocity_theta: 33.279 Angular Velocity-0.626
+
+Time: 6.005
+Time: 6.126
+ Tags detected:1
+ OPTIMIZED X: 4.029 OPTIMIZED_Y: 1.019
+ OPTIMIZED_PITCH: -7.275 OPTIMIZED_ROLL: 8.491 OPTIMIZED_YAW: 97.927
+ Velocity_X: -0.010 Velocity_Y: 0.013
+ Velocity_Mag: 0.016 Velocity_theta: 39.710 Angular Velocity-1.159
+
+Time: 6.242
+ Tags detected:1
+ OPTIMIZED X: 4.029 OPTIMIZED_Y: 1.019
+ OPTIMIZED_PITCH: -6.873 OPTIMIZED_ROLL: 8.565 OPTIMIZED_YAW: 97.922
+ Velocity_X: -0.001 Velocity_Y: -0.001
+ Velocity_Mag: 0.001 Velocity_theta: 149.384 Angular Velocity-0.042
+
+Time: 6.367
+ Tags detected:1
+ OPTIMIZED X: 4.030 OPTIMIZED_Y: 1.019
+ OPTIMIZED_PITCH: -8.281 OPTIMIZED_ROLL: 7.960 OPTIMIZED_YAW: 98.002
+ Velocity_X: 0.006 Velocity_Y: 0.000
+ Velocity_Mag: 0.006 Velocity_theta: 356.886 Angular Velocity0.641
+
+Time: 6.489
+ Tags detected:1
+ OPTIMIZED X: 4.031 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -7.084 OPTIMIZED_ROLL: 8.579 OPTIMIZED_YAW: 98.115
+ Velocity_X: 0.010 Velocity_Y: -0.021
+ Velocity_Mag: 0.023 Velocity_theta: 205.551 Angular Velocity0.931
+
+Time: 6.622
+ Tags detected:1
+ OPTIMIZED X: 4.031 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -7.758 OPTIMIZED_ROLL: 8.855 OPTIMIZED_YAW: 98.099
+ Velocity_X: 0.001 Velocity_Y: 0.003
+ Velocity_Mag: 0.003 Velocity_theta: 286.321 Angular Velocity-0.123
+
+Time: 6.751
+ Tags detected:1
+ OPTIMIZED X: 4.031 OPTIMIZED_Y: 1.018
+ OPTIMIZED_PITCH: -7.825 OPTIMIZED_ROLL: 8.159 OPTIMIZED_YAW: 98.150
+ Velocity_X: 0.005 Velocity_Y: 0.003
+ Velocity_Mag: 0.005 Velocity_theta: 330.136 Angular Velocity0.396
+
+Time: 6.870
+ Tags detected:1
+ OPTIMIZED X: 4.026 OPTIMIZED_Y: 1.022
+ OPTIMIZED_PITCH: -6.722 OPTIMIZED_ROLL: 8.784 OPTIMIZED_YAW: 97.493
+ Velocity_X: -0.049 Velocity_Y: 0.041
+ Velocity_Mag: 0.064 Velocity_theta: 50.482 Angular Velocity-5.529
+
+Time: 6.992
+ Tags detected:1
+ OPTIMIZED X: 4.027 OPTIMIZED_Y: 1.021
+ OPTIMIZED_PITCH: -7.705 OPTIMIZED_ROLL: 8.204 OPTIMIZED_YAW: 97.725
+ Velocity_X: 0.015 Velocity_Y: -0.015
+ Velocity_Mag: 0.021 Velocity_theta: 225.205 Angular Velocity1.909
+
+Time: 7.121
+ Tags detected:1
+ OPTIMIZED X: 4.031 OPTIMIZED_Y: 1.018
+ OPTIMIZED_PITCH: -7.533 OPTIMIZED_ROLL: 8.418 OPTIMIZED_YAW: 98.061
+ Velocity_X: 0.028 Velocity_Y: -0.022
+ Velocity_Mag: 0.036 Velocity_theta: 232.322 Angular Velocity2.600
+
+Time: 7.235
+ Tags detected:1
+ OPTIMIZED X: 4.032 OPTIMIZED_Y: 1.018
+ OPTIMIZED_PITCH: -7.657 OPTIMIZED_ROLL: 8.383 OPTIMIZED_YAW: 98.141
+ Velocity_X: 0.007 Velocity_Y: -0.002
+ Velocity_Mag: 0.007 Velocity_theta: 254.377 Angular Velocity0.701
+
+Time: 7.353
+ Tags detected:1
+ OPTIMIZED X: 4.033 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -7.535 OPTIMIZED_ROLL: 8.490 OPTIMIZED_YAW: 98.198
+ Velocity_X: 0.008 Velocity_Y: -0.003
+ Velocity_Mag: 0.008 Velocity_theta: 249.741 Angular Velocity0.481
+
+Time: 7.494
+ Tags detected:1
+ OPTIMIZED X: 4.032 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -7.136 OPTIMIZED_ROLL: 8.692 OPTIMIZED_YAW: 98.167
+ Velocity_X: -0.009 Velocity_Y: 0.001
+ Velocity_Mag: 0.009 Velocity_theta: 86.272 Angular Velocity-0.218
+
+Time: 7.620
+Time: 7.741
+ Tags detected:1
+ OPTIMIZED X: 4.033 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -7.371 OPTIMIZED_ROLL: 8.589 OPTIMIZED_YAW: 98.213
+ Velocity_X: 0.005 Velocity_Y: -0.001
+ Velocity_Mag: 0.006 Velocity_theta: 258.729 Angular Velocity0.186
+
+Time: 7.856
+ Tags detected:1
+ OPTIMIZED X: 4.037 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -12.480 OPTIMIZED_ROLL: 5.530 OPTIMIZED_YAW: 98.533
+ Velocity_X: 0.033 Velocity_Y: -0.009
+ Velocity_Mag: 0.035 Velocity_theta: 255.029 Angular Velocity2.787
+
+Time: 7.978
+ Tags detected:1
+ OPTIMIZED X: 4.032 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -6.779 OPTIMIZED_ROLL: 8.718 OPTIMIZED_YAW: 98.122
+ Velocity_X: -0.037 Velocity_Y: 0.006
+ Velocity_Mag: 0.038 Velocity_theta: 80.236 Angular Velocity-3.344
+
+Time: 8.100
+ Tags detected:1
+ OPTIMIZED X: 4.033 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -7.198 OPTIMIZED_ROLL: 8.744 OPTIMIZED_YAW: 98.243
+ Velocity_X: 0.004 Velocity_Y: -0.002
+ Velocity_Mag: 0.005 Velocity_theta: 245.725 Angular Velocity0.995
+
+Time: 8.215
+ Tags detected:1
+ OPTIMIZED X: 4.034 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -7.312 OPTIMIZED_ROLL: 8.689 OPTIMIZED_YAW: 98.347
+ Velocity_X: 0.013 Velocity_Y: -0.009
+ Velocity_Mag: 0.016 Velocity_theta: 233.808 Angular Velocity0.901
+
+Time: 8.339
+ Tags detected:1
+ OPTIMIZED X: 4.031 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -5.168 OPTIMIZED_ROLL: 9.476 OPTIMIZED_YAW: 98.035
+ Velocity_X: -0.027 Velocity_Y: 0.014
+ Velocity_Mag: 0.030 Velocity_theta: 63.164 Angular Velocity-2.491
+
+Time: 8.463
+ Tags detected:1
+ OPTIMIZED X: 4.032 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -6.867 OPTIMIZED_ROLL: 8.914 OPTIMIZED_YAW: 98.205
+ Velocity_X: 0.014 Velocity_Y: -0.001
+ Velocity_Mag: 0.014 Velocity_theta: 264.356 Angular Velocity1.371
+
+Time: 8.584
+ Tags detected:1
+ OPTIMIZED X: 4.032 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -7.094 OPTIMIZED_ROLL: 8.849 OPTIMIZED_YAW: 98.215
+ Velocity_X: -0.000 Velocity_Y: 0.004
+ Velocity_Mag: 0.004 Velocity_theta: 1.532 Angular Velocity0.081
+
+Time: 8.719
+Time: 8.845
+ Tags detected:1
+ OPTIMIZED X: 4.028 OPTIMIZED_Y: 1.021
+ OPTIMIZED_PITCH: -2.968 OPTIMIZED_ROLL: 10.507 OPTIMIZED_YAW: 97.633
+ Velocity_X: -0.017 Velocity_Y: 0.013
+ Velocity_Mag: 0.021 Velocity_theta: 52.730 Angular Velocity-2.225
+
+Time: 8.973
+ Tags detected:1
+ OPTIMIZED X: 4.033 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -7.416 OPTIMIZED_ROLL: 8.638 OPTIMIZED_YAW: 98.229
+ Velocity_X: 0.037 Velocity_Y: -0.027
+ Velocity_Mag: 0.046 Velocity_theta: 233.986 Angular Velocity4.637
+
+Time: 9.096
+ Tags detected:1
+ OPTIMIZED X: 4.034 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -8.148 OPTIMIZED_ROLL: 8.264 OPTIMIZED_YAW: 98.373
+ Velocity_X: 0.009 Velocity_Y: -0.013
+ Velocity_Mag: 0.016 Velocity_theta: 214.342 Angular Velocity1.183
+
+Time: 9.216
+ Tags detected:1
+ OPTIMIZED X: 4.033 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -7.257 OPTIMIZED_ROLL: 8.737 OPTIMIZED_YAW: 98.288
+ Velocity_X: -0.008 Velocity_Y: 0.003
+ Velocity_Mag: 0.008 Velocity_theta: 66.600 Angular Velocity-0.713
+
+Time: 9.333
+ Tags detected:1
+ OPTIMIZED X: 4.031 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -4.432 OPTIMIZED_ROLL: 9.761 OPTIMIZED_YAW: 98.011
+ Velocity_X: -0.016 Velocity_Y: 0.008
+ Velocity_Mag: 0.018 Velocity_theta: 62.527 Angular Velocity-2.354
+
+Time: 9.452
+ Tags detected:1
+ OPTIMIZED X: 4.033 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -6.964 OPTIMIZED_ROLL: 8.852 OPTIMIZED_YAW: 98.275
+ Velocity_X: 0.017 Velocity_Y: -0.005
+ Velocity_Mag: 0.018 Velocity_theta: 252.383 Angular Velocity2.215
+
+Time: 9.574
+ Tags detected:1
+ OPTIMIZED X: 4.034 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -7.169 OPTIMIZED_ROLL: 8.683 OPTIMIZED_YAW: 98.334
+ Velocity_X: 0.004 Velocity_Y: -0.006
+ Velocity_Mag: 0.007 Velocity_theta: 215.035 Angular Velocity0.488
+
+Time: 9.692
+ Tags detected:1
+ OPTIMIZED X: 4.035 OPTIMIZED_Y: 1.015
+ OPTIMIZED_PITCH: -7.984 OPTIMIZED_ROLL: 8.290 OPTIMIZED_YAW: 98.418
+ Velocity_X: 0.009 Velocity_Y: -0.003
+ Velocity_Mag: 0.009 Velocity_theta: 250.080 Angular Velocity0.716
+
+Time: 9.825
+Time: 9.946
+ Tags detected:1
+ OPTIMIZED X: 4.030 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -3.903 OPTIMIZED_ROLL: 9.926 OPTIMIZED_YAW: 97.943
+ Velocity_X: -0.017 Velocity_Y: 0.008
+ Velocity_Mag: 0.019 Velocity_theta: 65.199 Angular Velocity-1.870
+
+Time: 10.072
+ Tags detected:1
+ OPTIMIZED X: 4.034 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -7.604 OPTIMIZED_ROLL: 8.486 OPTIMIZED_YAW: 98.363
+ Velocity_X: 0.027 Velocity_Y: -0.010
+ Velocity_Mag: 0.028 Velocity_theta: 249.000 Angular Velocity3.345
+
+Time: 10.202
+ Tags detected:1
+ OPTIMIZED X: 4.034 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -6.002 OPTIMIZED_ROLL: 9.296 OPTIMIZED_YAW: 98.258
+ Velocity_X: 0.002 Velocity_Y: 0.002
+ Velocity_Mag: 0.003 Velocity_theta: 304.711 Angular Velocity-0.802
+
+Time: 10.323
+ Tags detected:1
+ OPTIMIZED X: 4.035 OPTIMIZED_Y: 1.016
+ OPTIMIZED_PITCH: -7.895 OPTIMIZED_ROLL: 8.385 OPTIMIZED_YAW: 98.484
+ Velocity_X: 0.011 Velocity_Y: -0.002
+ Velocity_Mag: 0.011 Velocity_theta: 260.896 Angular Velocity1.869
+
+Time: 10.445
+ Tags detected:1
+ OPTIMIZED X: 4.036 OPTIMIZED_Y: 1.015
+ OPTIMIZED_PITCH: -5.591 OPTIMIZED_ROLL: 9.451 OPTIMIZED_YAW: 98.423
+ Velocity_X: 0.010 Velocity_Y: -0.012
+ Velocity_Mag: 0.015 Velocity_theta: 218.361 Angular Velocity-0.507
+
+Time: 10.567
+Time: 10.693
+ Tags detected:1
+ OPTIMIZED X: 4.034 OPTIMIZED_Y: 1.017
+ OPTIMIZED_PITCH: -7.525 OPTIMIZED_ROLL: 9.110 OPTIMIZED_YAW: 98.333
+ Velocity_X: -0.011 Velocity_Y: 0.011
+ Velocity_Mag: 0.015 Velocity_theta: 44.906 Angular Velocity-0.359
+
+Time: 10.817
+ Tags detected:1
+ OPTIMIZED X: 4.034 OPTIMIZED_Y: 1.018
+ OPTIMIZED_PITCH: -5.900 OPTIMIZED_ROLL: 9.216 OPTIMIZED_YAW: 98.275
+ Velocity_X: 0.004 Velocity_Y: 0.008
+ Velocity_Mag: 0.009 Velocity_theta: 300.168 Angular Velocity-0.470
+
+Time: 10.942
+ Tags detected:1
+ OPTIMIZED X: 4.031 OPTIMIZED_Y: 1.025
+ OPTIMIZED_PITCH: -5.936 OPTIMIZED_ROLL: 8.457 OPTIMIZED_YAW: 98.209
+ Velocity_X: -0.025 Velocity_Y: 0.051
+ Velocity_Mag: 0.057 Velocity_theta: 25.847 Angular Velocity-0.532
+
+Time: 11.054
+Time: 11.171
+ Tags detected:1
+ OPTIMIZED X: 4.019 OPTIMIZED_Y: 1.057
+ OPTIMIZED_PITCH: -9.335 OPTIMIZED_ROLL: 1.799 OPTIMIZED_YAW: 97.613
+ Velocity_X: -0.053 Velocity_Y: 0.140
+ Velocity_Mag: 0.150 Velocity_theta: 20.539 Angular Velocity-2.597
+
+Time: 11.290
+ Tags detected:1
+ OPTIMIZED X: 4.027 OPTIMIZED_Y: 1.059
+ OPTIMIZED_PITCH: -21.553 OPTIMIZED_ROLL: -8.786 OPTIMIZED_YAW: 98.867
+ Velocity_X: 0.064 Velocity_Y: 0.013
+ Velocity_Mag: 0.066 Velocity_theta: 348.315 Angular Velocity10.542
+
+Time: 11.419
+ Tags detected:1
+ OPTIMIZED X: 4.043 OPTIMIZED_Y: 1.042
+ OPTIMIZED_PITCH: -12.307 OPTIMIZED_ROLL: -6.441 OPTIMIZED_YAW: 102.881
+ Velocity_X: 0.125 Velocity_Y: -0.125
+ Velocity_Mag: 0.177 Velocity_theta: 224.845 Angular Velocity31.233
+
+Time: 11.543
+ Tags detected:1
+ OPTIMIZED X: 4.048 OPTIMIZED_Y: 1.037
+ OPTIMIZED_PITCH: -8.653 OPTIMIZED_ROLL: -9.461 OPTIMIZED_YAW: 104.279
+ Velocity_X: 0.040 Velocity_Y: -0.041
+ Velocity_Mag: 0.058 Velocity_theta: 224.019 Angular Velocity11.207
+
+Time: 11.675
+ Tags detected:1
+ OPTIMIZED X: 4.026 OPTIMIZED_Y: 1.052
+ OPTIMIZED_PITCH: -15.262 OPTIMIZED_ROLL: -11.814 OPTIMIZED_YAW: 100.244
+ Velocity_X: -0.162 Velocity_Y: 0.113
+ Velocity_Mag: 0.197 Velocity_theta: 55.150 Angular Velocity-30.630
+
+Time: 11.808
+ Tags detected:1
+ OPTIMIZED X: 3.998 OPTIMIZED_Y: 1.072
+ OPTIMIZED_PITCH: -26.087 OPTIMIZED_ROLL: -17.227 OPTIMIZED_YAW: 94.760
+ Velocity_X: -0.212 Velocity_Y: 0.147
+ Velocity_Mag: 0.258 Velocity_theta: 55.298 Angular Velocity-41.104
+
+Time: 11.929
+Time: 12.053
+ Tags detected:1
+ OPTIMIZED X: 4.080 OPTIMIZED_Y: 1.144
+ OPTIMIZED_PITCH: -27.154 OPTIMIZED_ROLL: -11.592 OPTIMIZED_YAW: 97.226
+ Velocity_X: 0.334 Velocity_Y: 0.296
+ Velocity_Mag: 0.446 Velocity_theta: 318.516 Angular Velocity10.092
+
+Time: 12.174
+ Tags detected:1
+ OPTIMIZED X: 4.090 OPTIMIZED_Y: 1.153
+ OPTIMIZED_PITCH: -15.426 OPTIMIZED_ROLL: -5.986 OPTIMIZED_YAW: 98.288
+ Velocity_X: 0.085 Velocity_Y: 0.079
+ Velocity_Mag: 0.117 Velocity_theta: 317.102 Angular Velocity8.765
+
+Time: 12.338
+ Tags detected:1
+ OPTIMIZED X: 4.060 OPTIMIZED_Y: 1.183
+ OPTIMIZED_PITCH: -11.827 OPTIMIZED_ROLL: -7.769 OPTIMIZED_YAW: 96.312
+ Velocity_X: -0.181 Velocity_Y: 0.177
+ Velocity_Mag: 0.253 Velocity_theta: 45.659 Angular Velocity-12.004
+
+Time: 12.464
+ Tags detected:1
+ OPTIMIZED X: 4.052 OPTIMIZED_Y: 1.193
+ OPTIMIZED_PITCH: -10.010 OPTIMIZED_ROLL: -7.611 OPTIMIZED_YAW: 96.338
+ Velocity_X: -0.069 Velocity_Y: 0.086
+ Velocity_Mag: 0.111 Velocity_theta: 38.819 Angular Velocity0.211
+
+Time: 12.593
+ Tags detected:1
+ OPTIMIZED X: 4.047 OPTIMIZED_Y: 1.197
+ OPTIMIZED_PITCH: -13.840 OPTIMIZED_ROLL: -9.019 OPTIMIZED_YAW: 95.891
+ Velocity_X: -0.034 Velocity_Y: 0.029
+ Velocity_Mag: 0.044 Velocity_theta: 49.610 Angular Velocity-3.480
+
+Time: 12.727
+ Tags detected:1
+ OPTIMIZED X: 4.047 OPTIMIZED_Y: 1.195
+ OPTIMIZED_PITCH: -9.791 OPTIMIZED_ROLL: -8.425 OPTIMIZED_YAW: 96.059
+ Velocity_X: -0.004 Velocity_Y: -0.014
+ Velocity_Mag: 0.014 Velocity_theta: 107.913 Angular Velocity1.243
+
+Time: 12.847
+ Tags detected:1
+ OPTIMIZED X: 4.048 OPTIMIZED_Y: 1.192
+ OPTIMIZED_PITCH: -14.317 OPTIMIZED_ROLL: -9.143 OPTIMIZED_YAW: 95.688
+ Velocity_X: 0.012 Velocity_Y: -0.031
+ Velocity_Mag: 0.033 Velocity_theta: 201.513 Angular Velocity-3.109
+
+Time: 12.968
+ Tags detected:1
+ OPTIMIZED X: 4.051 OPTIMIZED_Y: 1.183
+ OPTIMIZED_PITCH: -13.191 OPTIMIZED_ROLL: -9.044 OPTIMIZED_YAW: 95.988
+ Velocity_X: 0.018 Velocity_Y: -0.071
+ Velocity_Mag: 0.073 Velocity_theta: 194.376 Angular Velocity2.473
+
+Time: 13.122
+ Tags detected:1
+ OPTIMIZED X: 4.050 OPTIMIZED_Y: 1.180
+ OPTIMIZED_PITCH: -14.232 OPTIMIZED_ROLL: -9.302 OPTIMIZED_YAW: 96.034
+ Velocity_X: -0.003 Velocity_Y: -0.019
+ Velocity_Mag: 0.019 Velocity_theta: 98.385 Angular Velocity0.298
+
+Time: 13.292
+ Tags detected:1
+ OPTIMIZED X: 4.052 OPTIMIZED_Y: 1.177
+ OPTIMIZED_PITCH: -13.249 OPTIMIZED_ROLL: -8.802 OPTIMIZED_YAW: 96.328
+ Velocity_X: 0.009 Velocity_Y: -0.015
+ Velocity_Mag: 0.018 Velocity_theta: 211.266 Angular Velocity1.727
+
+Time: 13.463
+ Tags detected:1
+ OPTIMIZED X: 4.051 OPTIMIZED_Y: 1.177
+ OPTIMIZED_PITCH: -13.689 OPTIMIZED_ROLL: -9.046 OPTIMIZED_YAW: 96.265
+ Velocity_X: -0.001 Velocity_Y: -0.002
+ Velocity_Mag: 0.002 Velocity_theta: 120.025 Angular Velocity-0.372
+
+Time: 13.594
+ Tags detected:1
+ OPTIMIZED X: 4.053 OPTIMIZED_Y: 1.178
+ OPTIMIZED_PITCH: -13.441 OPTIMIZED_ROLL: -8.511 OPTIMIZED_YAW: 96.293
+ Velocity_X: 0.009 Velocity_Y: 0.005
+ Velocity_Mag: 0.010 Velocity_theta: 331.613 Angular Velocity0.216
+
+Time: 13.722
+ Tags detected:1
+ OPTIMIZED X: 4.065 OPTIMIZED_Y: 1.172
+ OPTIMIZED_PITCH: -14.596 OPTIMIZED_ROLL: -8.467 OPTIMIZED_YAW: 96.518
+ Velocity_X: 0.098 Velocity_Y: -0.046
+ Velocity_Mag: 0.109 Velocity_theta: 245.151 Angular Velocity1.767
+
+Time: 13.845
+ Tags detected:1
+ OPTIMIZED X: 4.077 OPTIMIZED_Y: 1.179
+ OPTIMIZED_PITCH: -15.306 OPTIMIZED_ROLL: -8.450 OPTIMIZED_YAW: 96.734
+ Velocity_X: 0.099 Velocity_Y: 0.062
+ Velocity_Mag: 0.117 Velocity_theta: 328.095 Angular Velocity1.758
+
+Time: 13.965
+ Tags detected:1
+ OPTIMIZED X: 4.086 OPTIMIZED_Y: 1.186
+ OPTIMIZED_PITCH: -12.318 OPTIMIZED_ROLL: -6.575 OPTIMIZED_YAW: 97.099
+ Velocity_X: 0.070 Velocity_Y: 0.058
+ Velocity_Mag: 0.091 Velocity_theta: 320.339 Angular Velocity3.033
+
+Time: 14.089
+ Tags detected:1
+ OPTIMIZED X: 4.089 OPTIMIZED_Y: 1.202
+ OPTIMIZED_PITCH: -11.372 OPTIMIZED_ROLL: -6.135 OPTIMIZED_YAW: 97.188
+ Velocity_X: 0.030 Velocity_Y: 0.126
+ Velocity_Mag: 0.130 Velocity_theta: 283.213 Angular Velocity0.723
+
+Time: 14.219
+ Tags detected:1
+ OPTIMIZED X: 4.110 OPTIMIZED_Y: 1.253
+ OPTIMIZED_PITCH: -11.558 OPTIMIZED_ROLL: -5.979 OPTIMIZED_YAW: 95.779
+ Velocity_X: 0.155 Velocity_Y: 0.389
+ Velocity_Mag: 0.419 Velocity_theta: 291.736 Angular Velocity-10.778
+
+Time: 14.350
+ Tags detected:1
+ OPTIMIZED X: 4.107 OPTIMIZED_Y: 1.231
+ OPTIMIZED_PITCH: -10.228 OPTIMIZED_ROLL: -5.505 OPTIMIZED_YAW: 96.923
+ Velocity_X: -0.024 Velocity_Y: -0.166
+ Velocity_Mag: 0.167 Velocity_theta: 98.124 Angular Velocity8.761
+
+Time: 14.473
+ Tags detected:1
+ OPTIMIZED X: 4.105 OPTIMIZED_Y: 1.229
+ OPTIMIZED_PITCH: -10.833 OPTIMIZED_ROLL: -5.080 OPTIMIZED_YAW: 97.226
+ Velocity_X: -0.017 Velocity_Y: -0.018
+ Velocity_Mag: 0.025 Velocity_theta: 132.967 Angular Velocity2.461
+
+Time: 14.593
+ Tags detected:1
+ OPTIMIZED X: 4.102 OPTIMIZED_Y: 1.233
+ OPTIMIZED_PITCH: -10.840 OPTIMIZED_ROLL: -6.032 OPTIMIZED_YAW: 96.791
+ Velocity_X: -0.022 Velocity_Y: 0.036
+ Velocity_Mag: 0.042 Velocity_theta: 30.743 Angular Velocity-3.617
+
+Time: 14.713
+ Tags detected:1
+ OPTIMIZED X: 4.100 OPTIMIZED_Y: 1.218
+ OPTIMIZED_PITCH: -12.113 OPTIMIZED_ROLL: -7.122 OPTIMIZED_YAW: 96.603
+ Velocity_X: -0.016 Velocity_Y: -0.132
+ Velocity_Mag: 0.133 Velocity_theta: 96.693 Angular Velocity-1.581
+
+Time: 14.855
+ Tags detected:1
+ OPTIMIZED X: 4.098 OPTIMIZED_Y: 1.196
+ OPTIMIZED_PITCH: -10.035 OPTIMIZED_ROLL: -5.363 OPTIMIZED_YAW: 97.800
+ Velocity_X: -0.016 Velocity_Y: -0.149
+ Velocity_Mag: 0.150 Velocity_theta: 96.195 Angular Velocity8.386
+
+Time: 14.989
+ Tags detected:1
+ OPTIMIZED X: 4.093 OPTIMIZED_Y: 1.187
+ OPTIMIZED_PITCH: -10.842 OPTIMIZED_ROLL: -6.383 OPTIMIZED_YAW: 97.962
+ Velocity_X: -0.038 Velocity_Y: -0.069
+ Velocity_Mag: 0.078 Velocity_theta: 118.966 Angular Velocity1.211
+
+Time: 15.123
+ Tags detected:1
+ OPTIMIZED X: 4.091 OPTIMIZED_Y: 1.180
+ OPTIMIZED_PITCH: -10.182 OPTIMIZED_ROLL: -6.048 OPTIMIZED_YAW: 98.402
+ Velocity_X: -0.015 Velocity_Y: -0.050
+ Velocity_Mag: 0.052 Velocity_theta: 107.042 Angular Velocity3.267
+
+Time: 15.256
+ Tags detected:1
+ OPTIMIZED X: 4.089 OPTIMIZED_Y: 1.185
+ OPTIMIZED_PITCH: -10.635 OPTIMIZED_ROLL: -6.461 OPTIMIZED_YAW: 98.264
+ Velocity_X: -0.011 Velocity_Y: 0.032
+ Velocity_Mag: 0.034 Velocity_theta: 19.452 Angular Velocity-1.050
+
+Time: 15.376
+ Tags detected:1
+ OPTIMIZED X: 4.084 OPTIMIZED_Y: 1.183
+ OPTIMIZED_PITCH: -11.639 OPTIMIZED_ROLL: -7.265 OPTIMIZED_YAW: 97.886
+ Velocity_X: -0.041 Velocity_Y: -0.015
+ Velocity_Mag: 0.043 Velocity_theta: 159.317 Angular Velocity-3.144
+
+Time: 15.499
+ Tags detected:1
+ OPTIMIZED X: 4.085 OPTIMIZED_Y: 1.179
+ OPTIMIZED_PITCH: -11.251 OPTIMIZED_ROLL: -7.026 OPTIMIZED_YAW: 98.170
+ Velocity_X: 0.003 Velocity_Y: -0.030
+ Velocity_Mag: 0.031 Velocity_theta: 185.223 Angular Velocity2.310
+
+Time: 15.615
+ Tags detected:1
+ OPTIMIZED X: 4.085 OPTIMIZED_Y: 1.179
+ OPTIMIZED_PITCH: -11.192 OPTIMIZED_ROLL: -6.840 OPTIMIZED_YAW: 98.190
+ Velocity_X: 0.006 Velocity_Y: 0.000
+ Velocity_Mag: 0.006 Velocity_theta: 359.919 Angular Velocity0.179
+
+Time: 15.739
+ Tags detected:1
+ OPTIMIZED X: 4.083 OPTIMIZED_Y: 1.179
+ OPTIMIZED_PITCH: -11.838 OPTIMIZED_ROLL: -7.012 OPTIMIZED_YAW: 98.077
+ Velocity_X: -0.015 Velocity_Y: 0.003
+ Velocity_Mag: 0.016 Velocity_theta: 78.645 Angular Velocity-0.905
+
+Time: 15.870
+ Tags detected:1
+ OPTIMIZED X: 4.083 OPTIMIZED_Y: 1.181
+ OPTIMIZED_PITCH: -11.455 OPTIMIZED_ROLL: -7.191 OPTIMIZED_YAW: 97.981
+ Velocity_X: -0.000 Velocity_Y: 0.011
+ Velocity_Mag: 0.011 Velocity_theta: 1.845 Angular Velocity-0.734
+
+Time: 15.997
+ Tags detected:1
+ OPTIMIZED X: 4.082 OPTIMIZED_Y: 1.183
+ OPTIMIZED_PITCH: -11.209 OPTIMIZED_ROLL: -6.945 OPTIMIZED_YAW: 97.926
+ Velocity_X: -0.009 Velocity_Y: 0.013
+ Velocity_Mag: 0.016 Velocity_theta: 33.045 Angular Velocity-0.437
+
+Time: 16.119
+ Tags detected:1
+ OPTIMIZED X: 4.082 OPTIMIZED_Y: 1.185
+ OPTIMIZED_PITCH: -10.606 OPTIMIZED_ROLL: -6.893 OPTIMIZED_YAW: 97.797
+ Velocity_X: 0.000 Velocity_Y: 0.016
+ Velocity_Mag: 0.016 Velocity_theta: 270.434 Angular Velocity-1.051
+
+Time: 16.241
+ Tags detected:1
+ OPTIMIZED X: 4.082 OPTIMIZED_Y: 1.183
+ OPTIMIZED_PITCH: -12.006 OPTIMIZED_ROLL: -7.257 OPTIMIZED_YAW: 97.708
+ Velocity_X: -0.006 Velocity_Y: -0.013
+ Velocity_Mag: 0.014 Velocity_theta: 114.749 Angular Velocity-0.730
+
+Time: 16.372
+ Tags detected:1
+ OPTIMIZED X: 4.083 OPTIMIZED_Y: 1.183
+ OPTIMIZED_PITCH: -11.136 OPTIMIZED_ROLL: -7.128 OPTIMIZED_YAW: 97.680
+ Velocity_X: 0.008 Velocity_Y: 0.002
+ Velocity_Mag: 0.008 Velocity_theta: 346.514 Angular Velocity-0.209
+
+Time: 16.499
+ Tags detected:1
+ OPTIMIZED X: 4.082 OPTIMIZED_Y: 1.183
+ OPTIMIZED_PITCH: -12.514 OPTIMIZED_ROLL: -7.352 OPTIMIZED_YAW: 97.588
+ Velocity_X: -0.001 Velocity_Y: -0.005
+ Velocity_Mag: 0.005 Velocity_theta: 101.483 Angular Velocity-0.733
+
+Time: 16.626
+ Tags detected:1
+ OPTIMIZED X: 4.083 OPTIMIZED_Y: 1.182
+ OPTIMIZED_PITCH: -11.470 OPTIMIZED_ROLL: -7.042 OPTIMIZED_YAW: 97.704
+ Velocity_X: 0.003 Velocity_Y: -0.002
+ Velocity_Mag: 0.004 Velocity_theta: 228.126 Angular Velocity0.910
+
+Time: 16.750
+ Tags detected:1
+ OPTIMIZED X: 4.083 OPTIMIZED_Y: 1.180
+ OPTIMIZED_PITCH: -12.885 OPTIMIZED_ROLL: -7.192 OPTIMIZED_YAW: 97.716
+ Velocity_X: -0.002 Velocity_Y: -0.020
+ Velocity_Mag: 0.020 Velocity_theta: 96.789 Angular Velocity0.096
+
+Time: 16.867
+Time: 16.988
+Time: 17.116
+Time: 17.237
+Time: 17.350
+Time: 17.494
+Time: 17.618
+Time: 17.731
+Time: 17.846
+Time: 17.961
+Time: 18.076
+Time: 18.219
+Time: 18.361
+Time: 18.480
+Time: 18.613
+Time: 18.739
+Time: 18.864

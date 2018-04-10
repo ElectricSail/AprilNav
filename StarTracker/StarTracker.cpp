@@ -80,13 +80,7 @@ public:
 
 										 //Unique coordinate system, You must precisely measure the location of your coordinates in 3D space.
 										 //The index of a coordinate applys to the tag id. Currently only accounts for [X,Y]
-<<<<<<< HEAD
-	double coordinates1[9][2] = { { 4.117,1.217 },{ 1.446,3.442 },{ 4.141,5.089 },{ 0,0 },{ 0,0 },{ 0,-.7 },{ 0,1 },{ 0,0 },{ 0,0 } };
-
-=======
-	//double coordinates1[9][2] = { { 4.117,1.217 },{ 1.446,3.442 },{ 4.141,5.089 },{ 0,0 },{ 0,0 },{ 0,-.7 },{ 0,1 },{ 0,0 },{ 0,0 } };
-	
->>>>>>> 130e9673db95296492dded843334fd45eb57c3ea
+	double coordinates[9][2] = { { 4.117,1.217 },{ 1.446,3.442 },{ 4.141,5.089 },{ 0,0 },{ 0,0 },{ 0,-.7 },{ 0,1 },{ 0,0 },{ 0,0 } };
 	//Wall coordinates
 	//double coordinates[36][2] = { { 0,0 },{ -1.5,0 },{ 1.5,0 },{ 0,0 },{ 0,1 },{ 0,-.755 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 } };
 
@@ -100,15 +94,9 @@ public:
 		roll = ROLL;
 		yaw = YAW;
 		//Determine QR's coordinates given ID
-<<<<<<< HEAD
 		QR_X = coordinates[tagID][0];
 		QR_Y = coordinates[tagID][1];
 		//Determine Camera Position in relation to QR Coordinate
-=======
-		QR_X = coords[tagID][0];
-		QR_Y = coords[tagID][1];
-		//Determine Camera Position in relation to QR Coordinate 
->>>>>>> 130e9673db95296492dded843334fd45eb57c3ea
 		//Coordinate System has to be rotated to account for orientation of camera
 		X_Rot = X*cos(yaw) - Y*sin(yaw);
 		Y_Rot = Y*cos(yaw) + X*sin(yaw);
@@ -142,6 +130,7 @@ const string usage = "\n"
 "  -a              Arduino (send tag ids over serial port)\n"
 "  -d              Disable graphics\n"
 "  -t              Timing of tag extraction\n"
+"  -s              Supress Output\n"
 "  -C <bbxhh>      Tag family (default 36h11)\n"
 "  -D <id>         Video device ID (if multiple cameras present)\n"
 "  -F <fx>         Focal length in pixels\n"
@@ -218,6 +207,8 @@ void wRo_to_euler(const Eigen::Matrix3d& wRo, double& yaw, double& pitch, double
 	roll = standardRad(atan2(wRo(0, 2)*s - wRo(1, 2)*c, -wRo(0, 1)*s + wRo(1, 1)*c));
 }
 
+bool supressOutput = false;
+
 
 class Demo {
 
@@ -259,6 +250,7 @@ public:
 	int innerctr;
 	ofstream groupingData;
 	ofstream optimizedData;
+	ofstream OUTPUT;
 	double DISTANCE;
 	time_t tstart;
 	int detectionssize;
@@ -330,6 +322,7 @@ public:
 		}
 
 	void openCSV(string TOD, string header, string optimizedheader) {
+		OUTPUT.open("output.txt");
 		groupingData.open("Data/" + TOD + "_AllTags.csv");
 		optimizedData.open("Data/" + TOD + "_OptimizedData.csv");
 		groupingData << header;
@@ -424,7 +417,7 @@ public:
 	// parse command line options to change default behavior
 	void parseOptions(int argc, char* argv[]) {
 		int c;
-		while ((c = getopt(argc, argv, ":h?adtC:X:F:H:S:W:E:G:B:D:")) != -1) {
+		while ((c = getopt(argc, argv, ":h?adtsC:X:F:H:S:W:E:G:B:D:")) != -1) {
 			// Each option character has to be in the string in getopt();
 			// the first colon changes the error character from '?' to ':';
 			// a colon after an option means that there is an extra
@@ -444,6 +437,9 @@ public:
 				break;
 			case 't':
 				m_timing = true;
+				break;
+			case 's':
+				supressOutput = true;
 				break;
 			case 'C':
 				setTagCodes(optarg);
@@ -571,8 +567,9 @@ public:
 	}
 
 	void print_detection(AprilTags::TagDetection& detection) {
+		if (!supressOutput){
 		cout << "  Id: " << detection.id
-			<< " (Hamming: " << detection.hammingDistance << ")";
+			<< " (Hamming: " << detection.hammingDistance << ")";}
 
 		// recovering the relative pose of a tag:
 
@@ -595,7 +592,7 @@ public:
 		wRo_to_euler(fixed_rot, yaw, pitch, roll);
 
 		DISTANCE = translation.norm();
-
+		if (!supressOutput){
 		cout << "  distance=" << translation.norm()
 			<< "m, x=" << translation(1)*1
 			<< ", y=" << translation(2)
@@ -604,6 +601,7 @@ public:
 			<< ", pitch=" << pitch
 			<< ", roll=" << roll
 			<< endl;
+		}
 
 		//test << detection.id << "," << DISTANCE
 		groupingData << std::fixed << std::setprecision(3) <<
@@ -656,12 +654,13 @@ public:
 		vector<AprilTags::TagDetection> detections = m_tagDetector->extractTags(image_gray);
 		if (m_timing) {
 			double dt = tic() - t0;
-			cout << "Extracting tags took " << dt << " seconds." << endl;
+			if (!supressOutput){cout << "Extracting tags took " << dt << " seconds." << endl;}
 		}
 
 		// print out each detection
 		detectionssize = detections.size();
-		cout << detections.size() << " tags detected:" << endl;
+		if (!supressOutput){cout << detections.size() << " tags detected:" << endl;}
+		OUTPUT << std::fixed << std::setprecision(3) << "Time: "<< 	(clock() - start_s) / (double(CLOCKS_PER_SEC)) << endl;
 		for (int i = 0; i < detections.size(); i++) {
 			print_detection(detections[i]);
 		}
@@ -725,10 +724,18 @@ public:
 			veltheta = 270-fabs(veltheta);
 		}
 
+		if (!supressOutput){
 
 			cout << "OPTIMIZED X: " << OPTIMIZED_X << " OPTIMIZED_Y: " << OPTIMIZED_Y << " OPTIMIZED_PITCH: " << OPTIMIZED_PITCH
 				<< " OPTIMIZED_ROLL: " << OPTIMIZED_ROLL << " OPTIMIZED_YAW: " << OPTIMIZED_YAW << " Velocity_X: "<< delta_x/delta_t
 				<< " Velocity_Y: " << delta_y/delta_t << " Velocity_Mag: " << velmag << " Velocity_theta: " << veltheta << "Angular Velocity"<< delta_yaw/delta_t <<endl;
+}
+				OUTPUT << std::fixed << std::setprecision(3) <<
+				 " Tags detected:"<< detections.size() << endl <<
+				 " OPTIMIZED X: " << OPTIMIZED_X << " OPTIMIZED_Y: " << OPTIMIZED_Y << endl <<
+				 " OPTIMIZED_PITCH: " << OPTIMIZED_PITCH << " OPTIMIZED_ROLL: " << OPTIMIZED_ROLL << " OPTIMIZED_YAW: " << OPTIMIZED_YAW << endl <<
+				 " Velocity_X: "<< delta_x/delta_t << " Velocity_Y: " << delta_y/delta_t << endl <<
+				 " Velocity_Mag: " << velmag << " Velocity_theta: " << veltheta << " Angular Velocity"<< delta_yaw/delta_t <<endl <<endl;
 
 		optimizedData << std::fixed << std::setprecision(3) <<
 			(clock() - start_s) / (double(CLOCKS_PER_SEC)) << ","
@@ -752,10 +759,8 @@ public:
 		}
 
 
-		cout << "\nTAG SIZE" << Tags.size() << "\n";
+		if (!supressOutput){cout << "\nTAG SIZE" << Tags.size() << "\n";}
 		Tags.clear();
-
-
 
 		time_t t;
 		struct tm tm;
@@ -766,7 +771,7 @@ public:
 
 		//std::cout << std::setprecision(2)
 
-		std::cout << std::fixed << "Real Time: " << std::setprecision(3) << (clock() - start_s) / (double(CLOCKS_PER_SEC)) << std::endl;
+		if (!supressOutput){std::cout << std::fixed << "Real Time: " << std::setprecision(3) << (clock() - start_s) / (double(CLOCKS_PER_SEC)) << std::endl;}
 
 		// show the current image including any detections
 		if (m_draw) {
@@ -792,14 +797,14 @@ public:
 		    }
 		    string x_loc;   //can't use double or won't recognize 'getline'
 		    string y_loc;
-		    
+
 		    coords[30][2] = {};
 		    //string x_loc[3][0];
 		    while(data.good()){
 		        for (int i = 0; i < 30; i++){
 		            getline(data, x_loc, ',');
 		            getline(data, y_loc, '\n');
-		            
+
 		            double x;
 		            istringstream convertx(x_loc);
 		            if ( !(convertx >> x) )
@@ -808,7 +813,7 @@ public:
 		            istringstream converty(y_loc);
 		            if ( !(converty >> y) )
 		                y = 0;
-		            
+
 		            coords[i][0] = {x};
 		            coords[i][1] = {y};
 		        }
@@ -894,7 +899,7 @@ public:
 			frame++;
 			if (frame % 10 == 0) {
 				double t = tic();
-				cout << "  " << 10. / (t - last_t) << " fps" << endl;
+				if (!supressOutput){cout << "  " << 10. / (t - last_t) << " fps" << endl;}
 				last_t = t;
 			}
 
@@ -932,6 +937,10 @@ int main(int argc, char* argv[]) {
 	demo.openCSV(TOD, header, optimizedheader);
 	//ofstream a("test.csv");
 	//a << header;
+
+	if (supressOutput){
+		cout <<endl<< "OUTPUT SUPRESSED"<<endl<<endl;
+	}
 
 
 	if (demo.isVideo()) {
