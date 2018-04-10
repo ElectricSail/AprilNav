@@ -23,6 +23,7 @@ ifeq "$(BUILD_TYPE)" ""
 BUILD_TYPE="Release"
 endif
 
+
 all: pod-build/Makefile
 	$(MAKE) -C pod-build all install
 
@@ -39,10 +40,13 @@ configure:
 
 	# create the temporary build directory if needed
 	@mkdir -p pod-build
+	# create Data Directory if not present
+	@mkdir -p  "Data"
 
 	# run CMake to generate and configure the build scripts
 	@cd pod-build && cmake -DCMAKE_INSTALL_PREFIX=$(BUILD_PREFIX) \
 		   -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) ..
+
 
 clean:
 	-if [ -e pod-build/install_manifest.txt ]; then rm -f `cat pod-build/install_manifest.txt`; fi
