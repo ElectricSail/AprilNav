@@ -10,8 +10,6 @@ pods_install_executables(apriltags_demo)
 add_executable(imu imu.cpp Serial.cpp)
 pods_install_executables(imu)
 
-<<<<<<< HEAD
-=======
 add_executable(apriltagscsv apriltagscsv.cpp Serial.cpp)
 pods_install_executables(apriltagscsv)
 
@@ -29,4 +27,3 @@ pods_install_executables(SerialTest)
 
 add_executable(ATStripped ATStripped.cpp Serial.cpp)
 pods_install_executables(ATStripped)
->>>>>>> 28387bc25b2bbe5f40c4d0b498e3c28aabd757ac
