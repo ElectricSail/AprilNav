@@ -74,19 +74,14 @@ public:
 	double X, Y, Z; //Meters
 	double pitch, roll, yaw; //Radians
 	double QR_X, QR_Y; // Meters
-	double QR_Z = 8.1; //Meters
+	double QR_Z = 8.1; //Meters 
 	double CAMERA_X, CAMERA_Y, CAMERA_Z; //Meters
 	double X_Rot, Y_Rot;
 
 										 //Unique coordinate system, You must precisely measure the location of your coordinates in 3D space.
 										 //The index of a coordinate applys to the tag id. Currently only accounts for [X,Y]
-<<<<<<< HEAD
-	double coordinates1[9][2] = { { 4.117,1.217 },{ 1.446,3.442 },{ 4.141,5.089 },{ 0,0 },{ 0,0 },{ 0,-.7 },{ 0,1 },{ 0,0 },{ 0,0 } };
-
-=======
 	//double coordinates1[9][2] = { { 4.117,1.217 },{ 1.446,3.442 },{ 4.141,5.089 },{ 0,0 },{ 0,0 },{ 0,-.7 },{ 0,1 },{ 0,0 },{ 0,0 } };
 	
->>>>>>> 130e9673db95296492dded843334fd45eb57c3ea
 	//Wall coordinates
 	//double coordinates[36][2] = { { 0,0 },{ -1.5,0 },{ 1.5,0 },{ 0,0 },{ 0,1 },{ 0,-.755 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 } };
 
@@ -100,15 +95,9 @@ public:
 		roll = ROLL;
 		yaw = YAW;
 		//Determine QR's coordinates given ID
-<<<<<<< HEAD
-		QR_X = coordinates[tagID][0];
-		QR_Y = coordinates[tagID][1];
-		//Determine Camera Position in relation to QR Coordinate
-=======
 		QR_X = coords[tagID][0];
 		QR_Y = coords[tagID][1];
 		//Determine Camera Position in relation to QR Coordinate 
->>>>>>> 130e9673db95296492dded843334fd45eb57c3ea
 		//Coordinate System has to be rotated to account for orientation of camera
 		X_Rot = X*cos(yaw) - Y*sin(yaw);
 		Y_Rot = Y*cos(yaw) + X*sin(yaw);
@@ -118,13 +107,13 @@ public:
 		pitch = pitch * 180 / M_PI;
 		roll = roll * 180 / M_PI;
 		yaw = yaw * 180 / M_PI;
-
+		
 	}
 
 	friend ostream& operator<<(ostream& os, const TagOptimization& t);
 };
 
-//Allows you to print a TagOptimization object using cout <<
+//Allows you to print a TagOptimization object using cout << 
 ostream& operator<<(ostream& os, const TagOptimization& t)
 {
 	os << "," << t.time << "," << t.tagID << "," << t.X << "," << t.Y << ","
@@ -287,7 +276,7 @@ public:
 	vector<TagOptimization> Tags;
 	Mat cameraMatrix;
 	Mat distortionCoefficients;
-
+	
 
 	// default constructor
 	Demo() :
@@ -316,7 +305,7 @@ public:
 
 		m_deviceId(0)
 	{}
-
+	
 	//set precision for string output for serial communication with arduino
 	template <class T>
 	std::string to_string_with_precision(const T a_value, const int n = 3)
@@ -327,7 +316,7 @@ public:
 		stringstream stream;
 		stream << fixed << setprecision(n) << a_value;
 		return stream.str();
-		}
+		} 
 
 	void openCSV(string TOD, string header, string optimizedheader) {
 		groupingData.open("Data/" + TOD + "_AllTags.csv");
@@ -553,7 +542,7 @@ public:
 			v4l2_set_control(device, V4L2_CID_BRIGHTNESS, m_brightness * 256);
 		}
 		v4l2_close(device);
-#endif
+#endif 
 
 		// find and open a USB camera (built in laptop camera, web cam etc)
 		m_cap = cv::VideoCapture(m_deviceId);
@@ -688,7 +677,7 @@ public:
 			OPTIMIZED_PITCH = OPTIMIZED_PITCH / Tags.size();
 			OPTIMIZED_ROLL = OPTIMIZED_ROLL / Tags.size();
 			OPTIMIZED_YAW = OPTIMIZED_YAW / Tags.size();
-
+		
 		xnew = OPTIMIZED_X;
 		ynew = OPTIMIZED_Y;
 		yawnew = OPTIMIZED_YAW;
@@ -698,36 +687,36 @@ public:
 		timeold = timenow;
 		delta_x = xnew -xold;
 		delta_y = ynew -yold;
-		delta_yaw = yawnew-yawold;
+		delta_yaw = yawnew-yawold;	
 		xold = xnew;
 		yold = ynew;
 		yawold = yawnew;
 		velmag = sqrt(pow(delta_x/delta_t,2) + pow(delta_y/delta_t,2));
 		veltheta =  atan(delta_y/delta_x);
-		veltheta = veltheta * 180 / M_PI;
-
+		veltheta = veltheta * 180 / M_PI;		
+		
 //Coordinate System:     0°
-//                       |
+//                       |     
 //                 90°---|---270°
-//                       |
+//                       |  
 //                      180°
 
-		if(delta_x >=0 && delta_y >= 0){
+		if(delta_x >=0 && delta_y >= 0){ 
 			veltheta = 360-veltheta;
 		}
-		if(delta_x <=0 && delta_y >= 0){
+		if(delta_x <=0 && delta_y >= 0){ 
 			veltheta = 90 - fabs(veltheta);
 		}
-		if(delta_x <=0 && delta_y <= 0){
+		if(delta_x <=0 && delta_y <= 0){ 
 			veltheta =180 - fabs(veltheta);
 		}
-		if(delta_x >=0 && delta_y <= 0){
+		if(delta_x >=0 && delta_y <= 0){ 
 			veltheta = 270-fabs(veltheta);
 		}
 
 
 			cout << "OPTIMIZED X: " << OPTIMIZED_X << " OPTIMIZED_Y: " << OPTIMIZED_Y << " OPTIMIZED_PITCH: " << OPTIMIZED_PITCH
-				<< " OPTIMIZED_ROLL: " << OPTIMIZED_ROLL << " OPTIMIZED_YAW: " << OPTIMIZED_YAW << " Velocity_X: "<< delta_x/delta_t
+				<< " OPTIMIZED_ROLL: " << OPTIMIZED_ROLL << " OPTIMIZED_YAW: " << OPTIMIZED_YAW << " Velocity_X: "<< delta_x/delta_t 
 				<< " Velocity_Y: " << delta_y/delta_t << " Velocity_Mag: " << velmag << " Velocity_theta: " << veltheta << "Angular Velocity"<< delta_yaw/delta_t <<endl;
 
 		optimizedData << std::fixed << std::setprecision(3) <<
@@ -743,10 +732,10 @@ public:
 			<< veltheta << ","
 			<< delta_yaw/delta_t<<","
 			<< endl;
-
+		
 		//string for serial communication between pi and arduino
-		write_string = to_string_with_precision(OPTIMIZED_X) + "," + to_string_with_precision(OPTIMIZED_Y) + "," + to_string_with_precision(OPTIMIZED_PITCH) + "," +
-			to_string_with_precision(OPTIMIZED_ROLL) + "," + to_string_with_precision(OPTIMIZED_YAW) + "," + to_string_with_precision(delta_x/delta_t) + "," +
+		write_string = to_string_with_precision(OPTIMIZED_X) + "," + to_string_with_precision(OPTIMIZED_Y) + "," + to_string_with_precision(OPTIMIZED_PITCH) + "," + 
+			to_string_with_precision(OPTIMIZED_ROLL) + "," + to_string_with_precision(OPTIMIZED_YAW) + "," + to_string_with_precision(delta_x/delta_t) + "," + 
 			to_string_with_precision(delta_y/delta_t) + "," + to_string_with_precision(velmag) + "," + to_string_with_precision(veltheta) + "," +to_string_with_precision(delta_yaw/delta_t) + "*";
 
 		}
@@ -838,7 +827,7 @@ public:
 				*/
 				m_serial.print(write_string);
 				//m_serial.print("\n");
-
+				
 			}
 			else {
 				// no tag detected: tag ID = -1
