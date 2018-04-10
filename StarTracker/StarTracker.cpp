@@ -61,6 +61,9 @@ using namespace std;
 using namespace cv;
 
 //Stores Tag information for Optimization
+double coords[30][2] = {};
+
+//Stores Tag information for Optimization
 
 class TagOptimization {
 
@@ -77,10 +80,10 @@ public:
 
 										 //Unique coordinate system, You must precisely measure the location of your coordinates in 3D space.
 										 //The index of a coordinate applys to the tag id. Currently only accounts for [X,Y]
-	double coordinates1[9][2] = { { 4.117,1.217 },{ 1.446,3.442 },{ 4.141,5.089 },{ 0,0 },{ 0,0 },{ 0,-.7 },{ 0,1 },{ 0,0 },{ 0,0 } };
+	//double coordinates1[9][2] = { { 4.117,1.217 },{ 1.446,3.442 },{ 4.141,5.089 },{ 0,0 },{ 0,0 },{ 0,-.7 },{ 0,1 },{ 0,0 },{ 0,0 } };
 	
 	//Wall coordinates
-	double coordinates[36][2] = { { 0,0 },{ -1.5,0 },{ 1.5,0 },{ 0,0 },{ 0,1 },{ 0,-.755 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 } };
+	//double coordinates[36][2] = { { 0,0 },{ -1.5,0 },{ 1.5,0 },{ 0,0 },{ 0,1 },{ 0,-.755 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 } };
 
 	TagOptimization(double TIME, int TAGID, double x, double y, double PITCH, double ROLL, double YAW)
 	{
@@ -92,8 +95,8 @@ public:
 		roll = ROLL;
 		yaw = YAW;
 		//Determine QR's coordinates given ID
-		QR_X = coordinates[tagID][0];
-		QR_Y = coordinates[tagID][1];
+		QR_X = coords[tagID][0];
+		QR_Y = coords[tagID][1];
 		//Determine Camera Position in relation to QR Coordinate 
 		//Coordinate System has to be rotated to account for orientation of camera
 		X_Rot = X*cos(yaw) - Y*sin(yaw);
@@ -213,6 +216,7 @@ class Demo {
 	bool m_draw; // draw image and April tag detections?
 	bool m_arduino; // send tag detections to serial port?
 	bool m_timing; // print timing information for each tag extraction call
+	bool m_coordinates; //tag coordinates in csv file
 
 	int m_width; // image size in pixels
 	int m_height;
@@ -283,6 +287,7 @@ public:
 		m_draw(true),
 		m_arduino(false),
 		m_timing(false),
+		m_coordinates(true),
 
 		m_width(640),
 		m_height(480),
@@ -765,6 +770,42 @@ public:
 			imshow(windowName, image); // OpenCV call
 
 		}
+
+
+	//Get tag coordinates from csv
+		if(m_coordinates){
+		    ifstream data("StarTracker/Coordinates.csv");
+		    if(!data.is_open()) std::cout << "\nERROR: Can't find file with tag coordinates (Coordinates.csv)! \n" << '\n';
+		    if(!data.is_open()){    //abort if can't find file
+		        abort();
+		    }
+		    string x_loc;   //can't use double or won't recognize 'getline'
+		    string y_loc;
+		    
+		    coords[30][2] = {};
+		    //string x_loc[3][0];
+		    while(data.good()){
+		        for (int i = 0; i < 30; i++){
+		            getline(data, x_loc, ',');
+		            getline(data, y_loc, '\n');
+		            
+		            double x;
+		            istringstream convertx(x_loc);
+		            if ( !(convertx >> x) )
+		                x = 0;
+		            double y;
+		            istringstream converty(y_loc);
+		            if ( !(converty >> y) )
+		                y = 0;
+		            
+		            coords[i][0] = {x};
+		            coords[i][1] = {y};
+		        }
+		    }
+		    data.close();
+		    //cout << "\nTEST COORDS MATRIX: " << coords[0][0] << coords[1][0] << coords[2][0] << coords[0][1] << coords[1][1] << coords[2][1]  << "\n";
+		}
+
 
 		// optionally send tag information to serial port (e.g. to Arduino)
 		if (m_arduino) {
