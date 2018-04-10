@@ -254,6 +254,9 @@ public:
 	double yold = 0;
 	double xnew;
 	double ynew;
+	double yawnew;
+	double yawold;
+	double delta_yaw;
 	double delta_x;
 	double delta_y;
 	double velmag;
@@ -672,14 +675,17 @@ public:
 		
 		xnew = OPTIMIZED_X;
 		ynew = OPTIMIZED_Y;
+		yawnew = OPTIMIZED_YAW;
 		timenow = (clock() - start_s) / (double(CLOCKS_PER_SEC));
 
 		delta_t = timenow - timeold;
 		timeold = timenow;
 		delta_x = xnew -xold;
-		delta_y = ynew -yold;	
+		delta_y = ynew -yold;
+		delta_yaw = yawnew-yawold;	
 		xold = xnew;
 		yold = ynew;
+		yawold = yawnew;
 		velmag = sqrt(pow(delta_x/delta_t,2) + pow(delta_y/delta_t,2));
 		veltheta =  atan(delta_y/delta_x);
 		veltheta = veltheta * 180 / M_PI;		
@@ -706,7 +712,7 @@ public:
 
 			cout << "OPTIMIZED X: " << OPTIMIZED_X << " OPTIMIZED_Y: " << OPTIMIZED_Y << " OPTIMIZED_PITCH: " << OPTIMIZED_PITCH
 				<< " OPTIMIZED_ROLL: " << OPTIMIZED_ROLL << " OPTIMIZED_YAW: " << OPTIMIZED_YAW << " Velocity_X: "<< delta_x/delta_t 
-				<< " Velocity_Y: " << delta_y/delta_t << " Velocity_Mag: " << velmag << " Velocity_theta: " << veltheta << endl;
+				<< " Velocity_Y: " << delta_y/delta_t << " Velocity_Mag: " << velmag << " Velocity_theta: " << veltheta << "Angular Velocity"<< delta_yaw/delta_t <<endl;
 
 		optimizedData << std::fixed << std::setprecision(3) <<
 			(clock() - start_s) / (double(CLOCKS_PER_SEC)) << ","
@@ -719,12 +725,13 @@ public:
 			<< delta_y/delta_t << ","
 			<< velmag << ","
 			<< veltheta << ","
+			<< delta_yaw/delta_t<<","
 			<< endl;
 		
 		//string for serial communication between pi and arduino
 		write_string = to_string_with_precision(OPTIMIZED_X) + "," + to_string_with_precision(OPTIMIZED_Y) + "," + to_string_with_precision(OPTIMIZED_PITCH) + "," + 
 			to_string_with_precision(OPTIMIZED_ROLL) + "," + to_string_with_precision(OPTIMIZED_YAW) + "," + to_string_with_precision(delta_x/delta_t) + "," + 
-			to_string_with_precision(delta_y/delta_t) + "," + to_string_with_precision(velmag) + "," + to_string_with_precision(veltheta) +"*";
+			to_string_with_precision(delta_y/delta_t) + "," + to_string_with_precision(velmag) + "," + to_string_with_precision(veltheta) + "," +to_string_with_precision(delta_yaw/delta_t) + "*";
 
 		}
 
@@ -869,7 +876,7 @@ int main(int argc, char* argv[]) {
 	cout << "Current TOD: " << TOD << endl;
 
 	string header = "Count,Time,Tag ID,Distance,X,Y,Z,Pitch,Roll,Yaw\n";
-	string optimizedheader = "Time,X,Y,Pitch,Roll,Yaw,Velx,Vely,Velmag,Veltheta\n";
+	string optimizedheader = "Time,X,Y,Pitch,Roll,Yaw,Velx,Vely,Velmag,Veltheta,AngVel\n";
 	demo.openCSV(TOD, header, optimizedheader);
 	//ofstream a("test.csv");
 	//a << header;
@@ -898,4 +905,3 @@ int main(int argc, char* argv[]) {
 
 	return 0;
 }
-
