@@ -849,21 +849,32 @@ public:
 					}
 				}
 				if (m_tag){     //stay at ID 0
-					double x_tag = 2.071; //4.117;
-					double y_tag = -0.089; //.217;
-					if ( (y_tag-0.2 > OPTIMIZED_Y) && (delta_y/delta_t)<=2 ){
+					int TAG = 0;
+					//double loc_x = coords[TAG][0];
+					//double loc_y = coords[TAG][1];
+					if (TAG>30){  
+						cout<< "\nERROR: Tag "<< TAG<< " does not exit! Please enter a valid tag." <<endl;
+						abort();
+				   	}
+					double loc_x = 2.071; //4.117;
+					double loc_y = -0.089; //.217;
+					if ( (0 > loc_x) || (loc_x> 13.410) || (0 > loc_y) || (loc_y > 26.226) ){
+				   		cout <<"\nERROR: That location is out of bounds, please enter a valid x and y location." << endl;
+				   		abort();
+				   	}
+					if ( (loc_y-0.2 > OPTIMIZED_Y) && (delta_y/delta_t)<=2 ){
 						write_string = "f";
 						cout << "FORWARDS THRUSTERS!!!!" << endl;
 					}
-					else if ( (x_tag-1.0 > OPTIMIZED_X) && (delta_x/delta_t)<=2 ){
+					else if ( (loc_x-1.0 > OPTIMIZED_X) && (delta_x/delta_t)<=2 ){
 						write_string = "r";
 						cout << "RIGHT THRUSTERS!!!!" << endl;
 					}
-					else if ( (y_tag+0.2 < OPTIMIZED_Y) && (delta_y/delta_t)>=-2 ){
+					else if ( (loc_y+0.2 < OPTIMIZED_Y) && (delta_y/delta_t)>=-2 ){
 						write_string = "b";
 						cout << "BACKWARDS THRUSTERS!!!!" << endl;
 					}
-					else if ( (x_tag+1.0 < OPTIMIZED_X) && (delta_x/delta_t)>=-2 ){
+					else if ( (loc_x+1.0 < OPTIMIZED_X) && (delta_x/delta_t)>=-2 ){
 						write_string = "l";
 						cout << "LEFT THRUSTERS!!!!" << endl;
 					}
