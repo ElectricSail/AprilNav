@@ -512,7 +512,7 @@ public:
 		// optional: prepare serial port for communication with Arduino
 		if (m_arduino) {
 			//m_serial.open("/dev/ttyACM0", 57600);
-			m_serial.open("/dev/ttyUSB0", 57600);
+			m_serial.open("/dev/ttyUSB0", 9600);
 		}
 	}
 
