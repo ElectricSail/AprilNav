@@ -513,7 +513,7 @@ public:
 		// optional: prepare serial port for communication with Arduino
 		if (m_arduino) {
 			//m_serial.open("/dev/ttyACM0", 57600);
-			m_serial.open("/dev/ttyUSB0", 57600);
+			m_serial.open("/dev/ttyUSB0", 9600);
 		}
 	}
 
@@ -753,10 +753,7 @@ public:
 			<< endl;
 
 		//string for serial communication between pi and arduino
-		write_string = to_string_with_precision(OPTIMIZED_X) + "," + to_string_with_precision(OPTIMIZED_Y) + "," + to_string_with_precision(OPTIMIZED_PITCH) + "," +
-			to_string_with_precision(OPTIMIZED_ROLL) + "," + to_string_with_precision(OPTIMIZED_YAW) + "," + to_string_with_precision(delta_x/delta_t) + "," +
-			to_string_with_precision(delta_y/delta_t) + "," + to_string_with_precision(velmag) + "," + to_string_with_precision(veltheta) + "," +to_string_with_precision(delta_yaw/delta_t) + "*";
-
+		//write_string = to_string_with_precision(OPTIMIZED_X) + "," + to_string_with_precision(OPTIMIZED_Y) + "," + to_string_with_precision(OPTIMIZED_PITCH) + "," + to_string_with_precision(OPTIMIZED_ROLL) + "," + to_string_with_precision(OPTIMIZED_YAW) + "," + to_string_with_precision(delta_x/delta_t) + "," + to_string_with_precision(delta_y/delta_t) + "," + to_string_with_precision(velmag) + "," + to_string_with_precision(veltheta) + "," +to_string_with_precision(delta_yaw/delta_t) + "*";
 		}
 
 
@@ -827,24 +824,93 @@ public:
 		// optionally send tag information to serial port (e.g. to Arduino)
 		if (m_arduino) {
 			if (detections.size() > 0) {
-				// only the first detected tag is sent out for now
-				Eigen::Vector3d translation;
-				Eigen::Matrix3d rotation;
-				detections[0].getRelativeTranslationRotation(m_tagSize, m_fx, m_fy, m_px, m_py,
-					translation, rotation);
-				/*
-				m_serial.print(detections[0].id);
-				m_serial.print(",");
-				m_serial.print(translation(0));
-				m_serial.print(",");
-				m_serial.print(translation(1));
-				m_serial.print(",");
-				m_serial.print(translation(2));
-				m_serial.print("*");
-				*/
+				bool m_degree = true;
+				bool m_tag = false;
+				bool m_forward = false;
+				if (m_degree){    //stay facing 0 degrees
+					if( (5.0 <= OPTIMIZED_YAW)&&(OPTIMIZED_YAW <= 180.0) && (delta_yaw/delta_t >= -1) ){ 
+						cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
+						write_string = "c";
+					}
+					else if( (-180.0 <= OPTIMIZED_YAW)&&(OPTIMIZED_YAW <= -5.0) && (delta_yaw/delta_t <= 1) ){
+						cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
+						write_string = "w";
+					}
+					else if( (-5.0 < OPTIMIZED_YAW)&&(OPTIMIZED_YAW < 5.0) && (delta_yaw/delta_t >=2.5) ){
+						cout << "CLOCKWISE THRUSTERS!!!!  TOWARDS" << endl;
+						write_string = "c";
+					}
+					else if( (-5.0 < OPTIMIZED_YAW)&&(OPTIMIZED_YAW < 5.0) && (delta_yaw/delta_t <=-2.5) ){
+						cout << "CLOCKWISE THRUSTERS!!!!  TOWARDS" << endl;
+						write_string = "w";
+					}
+					else{
+						cout << "Nothing Happening!!!      " << endl;
+						write_string = "n";
+					}
+				}
+				if (m_tag){     //stay at ID 0
+					int TAG = 0;
+					//double loc_x = coords[TAG][0];
+					//double loc_y = coords[TAG][1];
+					if (TAG>30){  
+						cout<< "\nERROR: Tag "<< TAG<< " does not exit! Please enter a valid tag." <<endl;
+						abort();
+				   	}
+					double loc_x = 2.071; //4.117;
+					double loc_y = -0.089; //.217;
+					if ( (0 > loc_x) || (loc_x> 13.410) || (0 > loc_y) || (loc_y > 26.226) ){
+				   		cout <<"\nERROR: That location is out of bounds, please enter a valid x and y location." << endl;
+				   		abort();
+				   	}
+					if ( (loc_y-0.2 > OPTIMIZED_Y) && (delta_y/delta_t)<=2 ){
+						write_string = "f";
+						cout << "FORWARDS THRUSTERS!!!!" << endl;
+					}
+					else if ( (loc_x-1.0 > OPTIMIZED_X) && (delta_x/delta_t)<=2 ){
+						write_string = "r";
+						cout << "RIGHT THRUSTERS!!!!" << endl;
+					}
+					else if ( (loc_y+0.2 < OPTIMIZED_Y) && (delta_y/delta_t)>=-2 ){
+						write_string = "b";
+						cout << "BACKWARDS THRUSTERS!!!!" << endl;
+					}
+					else if ( (loc_x+1.0 < OPTIMIZED_X) && (delta_x/delta_t)>=-2 ){
+						write_string = "l";
+						cout << "LEFT THRUSTERS!!!!" << endl;
+					}
+					else{
+						cout<<"Do Nothing! " <<endl;
+						write_string = "n";
+					}
+				}
+				if (m_forward){   //move forward
+					if(-10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 10.0 && delta_y/delta_t <= 1){
+					    cout<<"Going Forward" << endl;
+					    write_string = "f";
+					}
+					else if( 10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 180.0 && delta_yaw/delta_t >= -1){ 
+					    cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
+					    write_string = "c";
+					}
+					else if(-180.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= -10.0 && delta_yaw/delta_t <= 1){
+					    cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
+					    write_string = "w";
+					}
+					else if(-10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 10.0 && delta_yaw/delta_t >=2){
+					    cout << "CLOCKWISE THRUSTERS!!!!  TOWARDS" << endl;
+					    write_string = "c";
+					}
+					else if(-10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 10.0 && delta_yaw/delta_t <=-2){
+					    cout << "CLOCKWISE THRUSTERS!!!!  TOWARDS" << endl;
+					    write_string = "w";
+					}
+					else{
+					cout << "Nothing Happening!!!      " << endl;
+					write_string = "n";
+					}
+				}   
 				m_serial.print(write_string);
-				//m_serial.print("\n");
-
 			}
 			else {
 				// no tag detected: tag ID = -1
