@@ -9,7 +9,7 @@ namespace AprilTags{
     void set(double TIME, int TAGID, double x, double y, double PITCH, double ROLL, double YAW);
     void inputParse(std::string str);
     void tail(int n);
-    void setup(FILE* fp);
+    void setup(FILE* fp, double COORDS[][2]);
     double getX();
     double getY();
   private:
@@ -17,7 +17,8 @@ namespace AprilTags{
     int count;
     char oldwp[255];
     std::vector<double> vect;
-    double WPX;
-    double WPY;
+    double WPX = NULL;
+    double WPY = NULL;
+    double coords[][2];
   };
 }
