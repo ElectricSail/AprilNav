@@ -58,9 +58,6 @@ void inputParse(string str){
       else{
         cout << "INVALID INPUT." << endl;
       }
-
-      //for (i=0; i< vect.size(); i++)
-          //std::cout << vect.at(i)<<std::endl;
 }
 
 // function to read last n lines from the file
@@ -121,10 +118,6 @@ int main()
   string command = "'./build/bin/StarTrackerInput' &";
   string term = NEWTERMINAL + command;
   system(term.c_str());
-
-//------------------------------------------------------------
-
-//-------------------------------------------------------------
 
   FILE* fp;
   char buffer[SIZE];

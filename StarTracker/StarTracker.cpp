@@ -36,8 +36,17 @@ using namespace std;
 #include <cmath>
 
 #ifndef __APPLE__
-#define NEWTERMINAL gnome-terminal -e
+#define NEWTERMINAL "open -a Terminal -n "
 #define EXPOSURE_CONTROL // only works in Linux
+#endif
+
+#ifdef __unix__
+#define NEWTERMINAL "gnome-terminal -e "
+#endif
+
+#ifdef __arm__
+printf("Detected Raspberry Pi\n");
+#define NEWTERMINAL "xterm -e "
 #endif
 
 #ifdef EXPOSURE_CONTROL
@@ -58,11 +67,13 @@ using namespace std;
 #include "AprilTags/Tag25h9.h"
 #include "AprilTags/Tag36h9.h"
 #include "AprilTags/Tag36h11.h"
+#include "AprilTags/Input.h"
 
 using namespace cv;
 
 //Stores Tag information for Optimization
 double coords[30][2] = {};
+FILE* fp;
 
 //Stores Tag information for Optimization
 
@@ -132,6 +143,7 @@ const string usage = "\n"
 "  -d              Disable graphics\n"
 "  -t              Timing of tag extraction\n"
 "  -s              Supress Output\n"
+"  -i              Accept Waypoint Input\n"
 "  -C <bbxhh>      Tag family (default 36h11)\n"
 "  -D <id>         Video device ID (if multiple cameras present)\n"
 "  -F <fx>         Focal length in pixels\n"
@@ -209,6 +221,7 @@ void wRo_to_euler(const Eigen::Matrix3d& wRo, double& yaw, double& pitch, double
 }
 
 bool supressOutput = false;
+bool acceptInput = false;
 
 
 class Demo {
@@ -280,6 +293,7 @@ public:
 	vector<TagOptimization> Tags;
 	Mat cameraMatrix;
 	Mat distortionCoefficients;
+	AprilTags::Input in;
 
 
 	// default constructor
@@ -418,7 +432,7 @@ public:
 	// parse command line options to change default behavior
 	void parseOptions(int argc, char* argv[]) {
 		int c;
-		while ((c = getopt(argc, argv, ":h?adtsC:X:F:H:S:W:E:G:B:D:")) != -1) {
+		while ((c = getopt(argc, argv, ":h?adtsiC:X:F:H:S:W:E:G:B:D:")) != -1) {
 			// Each option character has to be in the string in getopt();
 			// the first colon changes the error character from '?' to ':';
 			// a colon after an option means that there is an extra
@@ -441,6 +455,9 @@ public:
 				break;
 			case 's':
 				supressOutput = true;
+				break;
+			case 'i':
+				acceptInput = true;
 				break;
 			case 'C':
 				setTagCodes(optarg);
@@ -502,8 +519,9 @@ public:
 		}
 	}
 
-	void setup() {
+	void setup(AprilTags::Input IN) {
 		m_tagDetector = new AprilTags::TagDetector(m_tagCodes);
+		in = IN;
 
 		// prepare window for drawing the camera images
 		if (m_draw) {
@@ -756,6 +774,10 @@ public:
 		//write_string = to_string_with_precision(OPTIMIZED_X) + "," + to_string_with_precision(OPTIMIZED_Y) + "," + to_string_with_precision(OPTIMIZED_PITCH) + "," + to_string_with_precision(OPTIMIZED_ROLL) + "," + to_string_with_precision(OPTIMIZED_YAW) + "," + to_string_with_precision(delta_x/delta_t) + "," + to_string_with_precision(delta_y/delta_t) + "," + to_string_with_precision(velmag) + "," + to_string_with_precision(veltheta) + "," +to_string_with_precision(delta_yaw/delta_t) + "*";
 		}
 
+		if (acceptInput) {in.tail(1);}
+
+		cout << "COOORDS:" << in.getX() << ',' << in.getY() << endl;
+
 
 		if (!supressOutput){cout << "\nTAG SIZE" << Tags.size() << "\n";}
 		Tags.clear();
@@ -828,7 +850,7 @@ public:
 				bool m_tag = false;
 				bool m_forward = false;
 				if (m_degree){    //stay facing 0 degrees
-					if( (5.0 <= OPTIMIZED_YAW)&&(OPTIMIZED_YAW <= 180.0) && (delta_yaw/delta_t >= -1) ){ 
+					if( (5.0 <= OPTIMIZED_YAW)&&(OPTIMIZED_YAW <= 180.0) && (delta_yaw/delta_t >= -1) ){
 						cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
 						write_string = "c";
 					}
@@ -853,7 +875,7 @@ public:
 					int TAG = 0;
 					//double loc_x = coords[TAG][0];
 					//double loc_y = coords[TAG][1];
-					if (TAG>30){  
+					if (TAG>30){
 						cout<< "\nERROR: Tag "<< TAG<< " does not exit! Please enter a valid tag." <<endl;
 						abort();
 				   	}
@@ -889,7 +911,7 @@ public:
 					    cout<<"Going Forward" << endl;
 					    write_string = "f";
 					}
-					else if( 10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 180.0 && delta_yaw/delta_t >= -1){ 
+					else if( 10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 180.0 && delta_yaw/delta_t >= -1){
 					    cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
 					    write_string = "c";
 					}
@@ -909,7 +931,7 @@ public:
 					cout << "Nothing Happening!!!      " << endl;
 					write_string = "n";
 					}
-				}   
+				}
 				m_serial.print(write_string);
 			}
 			else {
@@ -984,14 +1006,21 @@ public:
 int main(int argc, char* argv[]) {
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
+	AprilTags::Input in;
+
+
+
 	Demo demo;
-
-
 	// process command line options
 	demo.parseOptions(argc, argv);
 
+	if (acceptInput == true) {
+		cout << "Input Accepted." << endl;
+		in.setup(fp);
+	}
 
-	demo.setup();
+
+	demo.setup(in);
 
 
 	//string filename = to_string(tm.tm_year + 1900);
