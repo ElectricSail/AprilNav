@@ -114,16 +114,16 @@ namespace AprilTags{
   }
 
   void Input::setup(FILE* FP, double COORDS[][2]){
-    
+
 
    //for(int i; i<2.9; i++){
  	//memcpy(&COORDS[i][0], &coords[i][0], 32*sizeof(double));
     	//coords[i][0] = COORDS[i][0];
-	
+
 	//cout<<"TEST: "<< coords[i][0]<<endl;
    //}
 
-	cout << "TESTESTEST" << coords[1][0] << endl;
+	cout << "TESTESTEST" << coords[0][0] << endl;
 	cout<<"TEST SIZE INTUP:   " << sizeof(COORDS)/sizeof(COORDS[0])<<endl;
 //cout << "\nTEST COORDS MATRIX: " << COORDS[0][0] << COORDS[1][0] << COORDS[2][0] << COORDS[0][1] << COORDS[1][1] << COORDS[2][1]  << "\n";
 
