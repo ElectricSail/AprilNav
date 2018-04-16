@@ -37,8 +37,12 @@ while [ "$1" != "" ]; do
       echo -e "\e[96m Double Terminal Activated \e[97m"
       if [ "$doubleterminal" = true ]; then
         #gnome-terminal -e 'tail -f output.txt'
-        gnome-terminal -e 'rainbow --cyan="Time*" --yellow="Tags detected:*" --blink="Vel*" tail -f output.txt'
+        #gnome-terminal -e 'rainbow --cyan="Time*" --yellow="Tags detected:*" --blink="Vel*" tail -f output.txt'
+        nohup xterm -hold -e 'rainbow --cyan="Time*" --yellow="Tags detected:*" --blink="Vel*" tail -f output.txt' &
+        nohup xterm -hold -e './build/bin/ThreadTest' &
+        #gnome-terminal -e './build/bin/StarTrackerInput'
         ./build/bin/StarTracker -S .401 -X Calibration/BlackCamera.txt -s
+
       fi
     else
       echo -e "\033[31m $1 is Not an accepted argument, -h for accepted options \e[97m"

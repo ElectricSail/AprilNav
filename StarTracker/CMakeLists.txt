@@ -18,3 +18,9 @@ pods_install_executables(VideoTest)
 
 add_executable(SerialTest SerialTest.cpp Serial.cpp)
 pods_install_executables(SerialTest)
+
+add_executable(ThreadTest ThreadTest.cpp Serial.cpp)
+pods_install_executables(ThreadTest)
+
+add_executable(StarTrackerInput StarTrackerInput.cpp Serial.cpp)
+pods_install_executables(StarTrackerInput)

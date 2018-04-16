@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tristan/Desktop/AprilTags/example/Serial.cpp
+fcntl.h
+-
+termios.h
+-
+stdlib.h
+-
+iostream
+-
+sstream
+-
+unistd.h
+-
+Serial.h
+/home/tristan/Desktop/AprilTags/example/Serial.h
+
+/home/tristan/Desktop/AprilTags/example/Serial.h
+string
+-
+
+/home/tristan/Desktop/AprilTags/example/imu.cpp
+iostream
+-
+string
+-
+stdio.h
+-
+math.h
+-
+Serial.h
+/home/tristan/Desktop/AprilTags/example/Serial.h
+

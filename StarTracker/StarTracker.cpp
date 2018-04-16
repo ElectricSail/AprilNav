@@ -36,6 +36,7 @@ using namespace std;
 #include <cmath>
 
 #ifndef __APPLE__
+#define NEWTERMINAL gnome-terminal -e
 #define EXPOSURE_CONTROL // only works in Linux
 #endif
 
@@ -885,6 +886,8 @@ public:
 
 			// capture frame
 			m_cap >> image;
+
+			//cout << "testing" << endl;
 
 
 			if (calibrate) {

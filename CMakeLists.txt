@@ -14,7 +14,7 @@ add_library(apriltags ${SOURCE_FILES})
 
 find_package(OpenCV)
 include_directories(${OpenCV_INCLUDE_DIRS})
-target_link_libraries(apriltags ${OpenCV_LIBS}) #-pg) #-fopenmp)
+target_link_libraries(apriltags ${OpenCV_LIBS} pthread) #-pg) #-fopenmp)
 pods_use_pkg_config_packages(apriltags eigen3)
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
