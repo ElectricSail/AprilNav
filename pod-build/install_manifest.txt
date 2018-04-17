@@ -33,5 +33,6 @@
 /home/tristan/Desktop/AprilTags/build/bin/SerialTest
 /home/tristan/Desktop/AprilTags/build/bin/ThreadTest
 /home/tristan/Desktop/AprilTags/build/bin/StarTrackerInput
+/home/tristan/Desktop/AprilTags/build/bin/Pointers
 /home/tristan/Desktop/AprilTags/build/bin/apriltags_demo
 /home/tristan/Desktop/AprilTags/build/bin/imu

@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include <string>
 #include <vector>
+#include <array>
 using namespace std;
 
 namespace AprilTags{
@@ -9,7 +10,8 @@ namespace AprilTags{
     void set(double TIME, int TAGID, double x, double y, double PITCH, double ROLL, double YAW);
     void inputParse(std::string str);
     void tail(int n);
-    void setup(FILE* fp, double COORDS[][2]);
+    void setup(FILE* fp, vector<array<double,2> > COORDS);
+    void verifyTag(int id);
     double getX();
     double getY();
   private:
@@ -19,6 +21,6 @@ namespace AprilTags{
     std::vector<double> vect;
     double WPX = NULL;
     double WPY = NULL;
-    double coords[][2];
+    vector <array<double,2> > coords;
   };
 }

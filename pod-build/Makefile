@@ -272,6 +272,19 @@ ThreadTest/fast:
 .PHONY : ThreadTest/fast
 
 #=============================================================================
+# Target rules for targets named Pointers
+
+# Build rule for target.
+Pointers: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Pointers
+.PHONY : Pointers
+
+# fast build rule for target.
+Pointers/fast:
+	$(MAKE) -f StarTracker/CMakeFiles/Pointers.dir/build.make StarTracker/CMakeFiles/Pointers.dir/build
+.PHONY : Pointers/fast
+
+#=============================================================================
 # Target rules for targets named apriltags_demo
 
 # Build rule for target.
@@ -750,6 +763,7 @@ help:
 	@echo "... apriltagscsv"
 	@echo "... SerialTest"
 	@echo "... ThreadTest"
+	@echo "... Pointers"
 	@echo "... apriltags_demo"
 	@echo "... imu"
 	@echo "... src/Edge.o"

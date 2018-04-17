@@ -7,7 +7,7 @@
 #endif
 
 #ifdef __unix__
-#define NEWTERMINAL "gnome-terminal -e "
+#define NEWTERMINAL "xterm -e "
 #endif
 
 #ifdef __arm__
@@ -56,11 +56,13 @@ namespace AprilTags{
     }
 
     else if (vect.size() == 1){
-      cout << "TagID: " << vect.at(0) << endl;
+      verifyTag(vect.at(0));
+      //cout << "TagID: " << vect.at(0) << endl;
     }
 
     else{
-      cout << "INVALID INPUT." << endl;
+      //cout << "\033[32mINVALID INPUT.\032[m" << endl;
+      cout << "\033[0;33mINVALID INPUT.\033[0m" << endl;
     }
   }
 
@@ -113,20 +115,27 @@ namespace AprilTags{
     }
   }
 
-  void Input::setup(FILE* FP, double COORDS[][2]){
+  void Input::verifyTag(int id){
+    if (id > coords.size() || id < 0)
+      cout << "\033[1;31mInvalid Tag Location, Does not exist.\033[0m" << endl;
+    else{
+      WPX = coords.at(id)[0];
+      WPY = coords.at(id)[1];
+      cout << "TagID: " << id << "  " <<
+      "X: " << WPX << "  " <<
+      "Y: " << WPY << endl;
+    }
+  }
 
 
-   //for(int i; i<2.9; i++){
- 	//memcpy(&COORDS[i][0], &coords[i][0], 32*sizeof(double));
-    	//coords[i][0] = COORDS[i][0];
 
-	//cout<<"TEST: "<< coords[i][0]<<endl;
-   //}
+  void Input::setup(FILE* FP, vector <array<double,2> > COORDS){
 
-	cout << "TESTESTEST" << coords[0][0] << endl;
-	cout<<"TEST SIZE INTUP:   " << sizeof(COORDS)/sizeof(COORDS[0])<<endl;
+    copy(COORDS.begin(),COORDS.end(),back_inserter(coords));
+    cout << "INPUT SIZE:" << coords.size() << endl;
+
+	cout << "TESTESTEST" << coords.at(1)[0] << endl;
 //cout << "\nTEST COORDS MATRIX: " << COORDS[0][0] << COORDS[1][0] << COORDS[2][0] << COORDS[0][1] << COORDS[1][1] << COORDS[2][1]  << "\n";
-
     fp = FP;
     string command = "'./build/bin/StarTrackerInput' &";
     string term = NEWTERMINAL + command;

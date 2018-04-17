@@ -116,6 +116,7 @@ set(CMAKE_DEPEND_INFO_FILES
   "StarTracker/CMakeFiles/apriltagscsv.dir/DependInfo.cmake"
   "StarTracker/CMakeFiles/SerialTest.dir/DependInfo.cmake"
   "StarTracker/CMakeFiles/ThreadTest.dir/DependInfo.cmake"
+  "StarTracker/CMakeFiles/Pointers.dir/DependInfo.cmake"
   "example/CMakeFiles/apriltags_demo.dir/DependInfo.cmake"
   "example/CMakeFiles/imu.dir/DependInfo.cmake"
   )

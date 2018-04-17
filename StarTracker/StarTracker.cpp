@@ -34,19 +34,10 @@ using namespace std;
 #include <ctime>
 #include <iomanip>
 #include <cmath>
+#include <array>
 
 #ifndef __APPLE__
-#define NEWTERMINAL "open -a Terminal -n "
 #define EXPOSURE_CONTROL // only works in Linux
-#endif
-
-#ifdef __unix__
-#define NEWTERMINAL "gnome-terminal -e "
-#endif
-
-#ifdef __arm__
-printf("Detected Raspberry Pi\n");
-#define NEWTERMINAL "xterm -e "
 #endif
 
 #ifdef EXPOSURE_CONTROL
@@ -72,8 +63,11 @@ printf("Detected Raspberry Pi\n");
 using namespace cv;
 
 //Stores Tag information for Optimization
-double coords[30][2] = {};
+//double coords[30][2] = {};
 FILE* fp;
+bool m_coordinates(true);
+//Coordinates
+vector <array<double,2> > coords;
 
 //Stores Tag information for Optimization
 
@@ -106,8 +100,8 @@ public:
 		roll = ROLL;
 		yaw = YAW;
 		//Determine QR's coordinates given ID
-		QR_X = coords[tagID][0];
-		QR_Y = coords[tagID][1];
+		QR_X = coords.at(tagID)[0];
+		QR_Y = coords.at(tagID)[1];
 		//Determine Camera Position in relation to QR Coordinate
 		//Coordinate System has to be rotated to account for orientation of camera
 		X_Rot = X*cos(yaw) - Y*sin(yaw);
@@ -223,8 +217,10 @@ void wRo_to_euler(const Eigen::Matrix3d& wRo, double& yaw, double& pitch, double
 bool supressOutput = false;
 bool acceptInput = false;
 
+/*  Right now coordinates from a CSV file have to be in order, we may want to rewrite
+ *  in case tags aren't in order or if some are not used/missing
+ */
 
-bool m_coordinates(true);
 void readTagLocation(){
 //Get tag coordinates from csv
 		if(m_coordinates){
@@ -236,7 +232,7 @@ void readTagLocation(){
 		    string x_loc;   //can't use double or won't recognize 'getline'
 		    string y_loc;
 
-		    coords[30][2] = {};
+		    //coords[30][2] = {};
 		    //string x_loc[3][0];
 		    while(data.good()){
 		        for (int i = 0; i < 30; i++){
@@ -252,8 +248,9 @@ void readTagLocation(){
 		            if ( !(converty >> y) )
 		                y = 0;
 
-		            coords[i][0] = {x};
-		            coords[i][1] = {y};
+		            //coords[i][0] = {x};
+		            //coords[i][1] = {y};
+								coords.push_back({x,y});
 
 		        }
 		    }
@@ -571,7 +568,7 @@ public:
 			//m_serial.open("/dev/ttyACM0", 57600);
 			m_serial.open("/dev/ttyUSB0", 9600);
 		}
-		
+
 	}
 
 	void setupVideo() {
@@ -846,7 +843,7 @@ public:
 
 		}
 
-		
+
 
 
 		// optionally send tag information to serial port (e.g. to Arduino)
@@ -1011,8 +1008,8 @@ public:
    // here is were everything begins
 int main(int argc, char* argv[]) {
 	readTagLocation();
-cout<<"TEST SIZE:   " << sizeof(coords)/sizeof(coords[0])<<endl;
-cout << "\nTEST COORDS MATRIX: " << coords[0][0] << coords[1][0] << coords[2][0] << coords[0][1] << coords[1][1] << coords[2][1]  << "\n";
+cout<<"TEST SIZE:   " << coords.size()<<endl;
+cout << "\nTEST COORDS MATRIX: " << coords.at(0)[0] << coords.at(1)[0] << coords.at(2)[0] << coords.at(0)[1] << coords.at(1)[1] << coords.at(2)[1]  << "\n";
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 	AprilTags::Input in;
@@ -1044,7 +1041,7 @@ cout << "\nTEST COORDS MATRIX: " << coords[0][0] << coords[1][0] << coords[2][0]
 	demo.openCSV(TOD, header, optimizedheader);
 	//ofstream a("test.csv");
 	//a << header;
-	cout<<"X TEST: " << coords[1][0]<<endl;
+	cout<<"X TEST: " << coords.at(0)[0]<<endl;
 	if (supressOutput){
 		cout <<endl<< "OUTPUT SUPRESSED"<<endl<<endl;
 	}

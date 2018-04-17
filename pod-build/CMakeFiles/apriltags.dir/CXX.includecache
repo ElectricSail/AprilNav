@@ -59,6 +59,8 @@ string
 -
 vector
 -
+array
+-
 
 ../AprilTags/MathUtil.h
 cmath

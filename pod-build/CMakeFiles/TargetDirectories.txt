@@ -7,6 +7,7 @@
 /home/tristan/Desktop/AprilTags/pod-build/CMakeFiles/install/local.dir
 /home/tristan/Desktop/AprilTags/pod-build/CMakeFiles/install/strip.dir
 /home/tristan/Desktop/AprilTags/pod-build/StarTracker/CMakeFiles/rebuild_cache.dir
+/home/tristan/Desktop/AprilTags/pod-build/StarTracker/CMakeFiles/edit_cache.dir
 /home/tristan/Desktop/AprilTags/pod-build/StarTracker/CMakeFiles/StarTracker_testtags.dir
 /home/tristan/Desktop/AprilTags/pod-build/StarTracker/CMakeFiles/install.dir
 /home/tristan/Desktop/AprilTags/pod-build/StarTracker/CMakeFiles/StarTrackerInput.dir
@@ -15,7 +16,7 @@
 /home/tristan/Desktop/AprilTags/pod-build/StarTracker/CMakeFiles/apriltagscsv.dir
 /home/tristan/Desktop/AprilTags/pod-build/StarTracker/CMakeFiles/SerialTest.dir
 /home/tristan/Desktop/AprilTags/pod-build/StarTracker/CMakeFiles/ThreadTest.dir
-/home/tristan/Desktop/AprilTags/pod-build/StarTracker/CMakeFiles/edit_cache.dir
+/home/tristan/Desktop/AprilTags/pod-build/StarTracker/CMakeFiles/Pointers.dir
 /home/tristan/Desktop/AprilTags/pod-build/StarTracker/CMakeFiles/list_install_components.dir
 /home/tristan/Desktop/AprilTags/pod-build/StarTracker/CMakeFiles/install/strip.dir
 /home/tristan/Desktop/AprilTags/pod-build/StarTracker/CMakeFiles/install/local.dir
