@@ -1,4 +1,4 @@
-## AprilTags library
+## AprilNav
 
 [![license](https://img.shields.io/badge/license-LGPL%202.1-blue.svg)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html)
 
