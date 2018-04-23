@@ -7,8 +7,8 @@ link_libraries(apriltags)
 add_executable(apriltagscsv apriltagscsv.cpp Serial.cpp)
 pods_install_executables(apriltagscsv)
 
-add_executable(StarTracker StarTracker.cpp Serial.cpp)
-pods_install_executables(StarTracker)
+add_executable(AprilNav AprilNav.cpp Serial.cpp)
+pods_install_executables(AprilNav)
 
 add_executable(StarTracker_testtags StarTracker_testtags.cpp Serial.cpp)
 pods_install_executables(StarTracker_testtags)

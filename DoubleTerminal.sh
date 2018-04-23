@@ -41,7 +41,7 @@ while [ "$1" != "" ]; do
         nohup xterm -hold -e 'rainbow --cyan="Time*" --yellow="Tags detected:*" --blink="Vel*" tail -f output.txt' &
         nohup xterm -hold -e './build/bin/ThreadTest' &
         #gnome-terminal -e './build/bin/StarTrackerInput'
-        ./build/bin/StarTracker -S .401 -X Calibration/BlackCamera.txt -s
+        ./build/bin/AprilNav -S .401 -X Calibration/BlackCamera.txt -s
 
       fi
     else

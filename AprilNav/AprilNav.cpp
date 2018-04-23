@@ -34,6 +34,7 @@ using namespace std;
 #include <ctime>
 #include <iomanip>
 #include <cmath>
+#include <array>
 
 #ifndef __APPLE__
 #define EXPOSURE_CONTROL // only works in Linux
@@ -57,8 +58,16 @@ using namespace std;
 #include "AprilTags/Tag25h9.h"
 #include "AprilTags/Tag36h9.h"
 #include "AprilTags/Tag36h11.h"
+#include "AprilTags/Input.h"
 
 using namespace cv;
+
+//Stores Tag information for Optimization
+//double coords[30][2] = {};
+FILE* fp;
+bool m_coordinates(true);
+//Coordinates
+vector <array<double,2> > coords;
 
 //Stores Tag information for Optimization
 
@@ -77,10 +86,9 @@ public:
 
 										 //Unique coordinate system, You must precisely measure the location of your coordinates in 3D space.
 										 //The index of a coordinate applys to the tag id. Currently only accounts for [X,Y]
-	double coordinates1[9][2] = { { 4.117,1.217 },{ 1.446,3.442 },{ 4.141,5.089 },{ 0,0 },{ 0,0 },{ 0,-.7 },{ 0,1 },{ 0,0 },{ 0,0 } };
-
+	//double coordinates[9][2] = { { 4.117,1.217 },{ 1.446,3.442 },{ 4.141,5.089 },{ 0,0 },{ 0,0 },{ 0,-.7 },{ 0,1 },{ 0,0 },{ 0,0 } };
 	//Wall coordinates
-	double coordinates[36][2] = { { 0,0 },{ -1.5,0 },{ 1.5,0 },{ 0,0 },{ 0,1 },{ 0,-.755 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 } };
+	//double coordinates[36][2] = { { 0,0 },{ -1.5,0 },{ 1.5,0 },{ 0,0 },{ 0,1 },{ 0,-.755 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 } };
 
 	TagOptimization(double TIME, int TAGID, double x, double y, double PITCH, double ROLL, double YAW)
 	{
@@ -92,8 +100,8 @@ public:
 		roll = ROLL;
 		yaw = YAW;
 		//Determine QR's coordinates given ID
-		QR_X = coordinates[tagID][0];
-		QR_Y = coordinates[tagID][1];
+		QR_X = coords.at(tagID)[0];
+		QR_Y = coords.at(tagID)[1];
 		//Determine Camera Position in relation to QR Coordinate
 		//Coordinate System has to be rotated to account for orientation of camera
 		X_Rot = X*cos(yaw) - Y*sin(yaw);
@@ -128,6 +136,8 @@ const string usage = "\n"
 "  -a              Arduino (send tag ids over serial port)\n"
 "  -d              Disable graphics\n"
 "  -t              Timing of tag extraction\n"
+"  -s              Supress Output\n"
+"  -i              Accept Waypoint Input\n"
 "  -C <bbxhh>      Tag family (default 36h11)\n"
 "  -D <id>         Video device ID (if multiple cameras present)\n"
 "  -F <fx>         Focal length in pixels\n"
@@ -204,6 +214,51 @@ void wRo_to_euler(const Eigen::Matrix3d& wRo, double& yaw, double& pitch, double
 	roll = standardRad(atan2(wRo(0, 2)*s - wRo(1, 2)*c, -wRo(0, 1)*s + wRo(1, 1)*c));
 }
 
+bool supressOutput = false;
+bool acceptInput = false;
+
+/*  Right now coordinates from a CSV file have to be in order, we may want to rewrite
+ *  in case tags aren't in order or if some are not used/missing
+ */
+
+void readTagLocation(){
+//Get tag coordinates from csv
+		if(m_coordinates){
+		    ifstream data("AprilNav/Coordinates.csv");
+		    if(!data.is_open()) std::cout << "\nERROR: Can't find file with tag coordinates (Coordinates.csv)! \n" << '\n';
+		    if(!data.is_open()){    //abort if can't find file
+		        abort();
+		    }
+		    string x_loc;   //can't use double or won't recognize 'getline'
+		    string y_loc;
+
+		    //coords[30][2] = {};
+		    //string x_loc[3][0];
+		    while(data.good()){
+		        for (int i = 0; i < 30; i++){
+		            getline(data, x_loc, ',');
+		            getline(data, y_loc, '\n');
+
+		            double x;
+		            istringstream convertx(x_loc);
+		            if ( !(convertx >> x) )
+		                x = 0;
+		            double y;
+		            istringstream converty(y_loc);
+		            if ( !(converty >> y) )
+		                y = 0;
+
+		            //coords[i][0] = {x};
+		            //coords[i][1] = {y};
+								coords.push_back({x,y});
+
+		        }
+		    }
+		    data.close();
+		    //cout << "\nTEST COORDS MATRIX: " << coords[0][0] << coords[1][0] << coords[2][0] << coords[0][1] << coords[1][1] << coords[2][1]  << "\n";
+}
+}
+
 
 class Demo {
 
@@ -213,6 +268,7 @@ class Demo {
 	bool m_draw; // draw image and April tag detections?
 	bool m_arduino; // send tag detections to serial port?
 	bool m_timing; // print timing information for each tag extraction call
+	//bool m_coordinates; //tag coordinates in csv file
 
 	int m_width; // image size in pixels
 	int m_height;
@@ -244,6 +300,7 @@ public:
 	int innerctr;
 	ofstream groupingData;
 	ofstream optimizedData;
+	ofstream OUTPUT;
 	double DISTANCE;
 	time_t tstart;
 	int detectionssize;
@@ -272,6 +329,7 @@ public:
 	vector<TagOptimization> Tags;
 	Mat cameraMatrix;
 	Mat distortionCoefficients;
+	AprilTags::Input in;
 
 
 	// default constructor
@@ -314,6 +372,7 @@ public:
 		}
 
 	void openCSV(string TOD, string header, string optimizedheader) {
+		OUTPUT.open("output.txt");
 		groupingData.open("Data/" + TOD + "_AllTags.csv");
 		optimizedData.open("Data/" + TOD + "_OptimizedData.csv");
 		groupingData << header;
@@ -408,7 +467,7 @@ public:
 	// parse command line options to change default behavior
 	void parseOptions(int argc, char* argv[]) {
 		int c;
-		while ((c = getopt(argc, argv, ":h?adtC:X:F:H:S:W:E:G:B:D:")) != -1) {
+		while ((c = getopt(argc, argv, ":h?adtsiC:X:F:H:S:W:E:G:B:D:")) != -1) {
 			// Each option character has to be in the string in getopt();
 			// the first colon changes the error character from '?' to ':';
 			// a colon after an option means that there is an extra
@@ -428,6 +487,12 @@ public:
 				break;
 			case 't':
 				m_timing = true;
+				break;
+			case 's':
+				supressOutput = true;
+				break;
+			case 'i':
+				acceptInput = true;
 				break;
 			case 'C':
 				setTagCodes(optarg);
@@ -489,8 +554,9 @@ public:
 		}
 	}
 
-	void setup() {
+	void setup(AprilTags::Input IN) {
 		m_tagDetector = new AprilTags::TagDetector(m_tagCodes);
+		in = IN;
 
 		// prepare window for drawing the camera images
 		if (m_draw) {
@@ -500,8 +566,9 @@ public:
 		// optional: prepare serial port for communication with Arduino
 		if (m_arduino) {
 			//m_serial.open("/dev/ttyACM0", 57600);
-			m_serial.open("/dev/ttyUSB0", 57600);
+			m_serial.open("/dev/ttyUSB0", 9600);
 		}
+
 	}
 
 	void setupVideo() {
@@ -555,8 +622,9 @@ public:
 	}
 
 	void print_detection(AprilTags::TagDetection& detection) {
+		if (!supressOutput){
 		cout << "  Id: " << detection.id
-			<< " (Hamming: " << detection.hammingDistance << ")";
+			<< " (Hamming: " << detection.hammingDistance << ")";}
 
 		// recovering the relative pose of a tag:
 
@@ -579,7 +647,7 @@ public:
 		wRo_to_euler(fixed_rot, yaw, pitch, roll);
 
 		DISTANCE = translation.norm();
-
+		if (!supressOutput){
 		cout << "  distance=" << translation.norm()
 			<< "m, x=" << translation(1)*1
 			<< ", y=" << translation(2)
@@ -588,6 +656,7 @@ public:
 			<< ", pitch=" << pitch
 			<< ", roll=" << roll
 			<< endl;
+		}
 
 		//test << detection.id << "," << DISTANCE
 		groupingData << std::fixed << std::setprecision(3) <<
@@ -640,12 +709,13 @@ public:
 		vector<AprilTags::TagDetection> detections = m_tagDetector->extractTags(image_gray);
 		if (m_timing) {
 			double dt = tic() - t0;
-			cout << "Extracting tags took " << dt << " seconds." << endl;
+			if (!supressOutput){cout << "Extracting tags took " << dt << " seconds." << endl;}
 		}
 
 		// print out each detection
 		detectionssize = detections.size();
-		cout << detections.size() << " tags detected:" << endl;
+		if (!supressOutput){cout << detections.size() << " tags detected:" << endl;}
+		OUTPUT << std::fixed << std::setprecision(3) << "Time: "<< 	(clock() - start_s) / (double(CLOCKS_PER_SEC)) << endl;
 		for (int i = 0; i < detections.size(); i++) {
 			print_detection(detections[i]);
 		}
@@ -709,10 +779,18 @@ public:
 			veltheta = 270-fabs(veltheta);
 		}
 
+		if (!supressOutput){
 
 			cout << "OPTIMIZED X: " << OPTIMIZED_X << " OPTIMIZED_Y: " << OPTIMIZED_Y << " OPTIMIZED_PITCH: " << OPTIMIZED_PITCH
 				<< " OPTIMIZED_ROLL: " << OPTIMIZED_ROLL << " OPTIMIZED_YAW: " << OPTIMIZED_YAW << " Velocity_X: "<< delta_x/delta_t
 				<< " Velocity_Y: " << delta_y/delta_t << " Velocity_Mag: " << velmag << " Velocity_theta: " << veltheta << "Angular Velocity"<< delta_yaw/delta_t <<endl;
+}
+				OUTPUT << std::fixed << std::setprecision(3) <<
+				 " Tags detected:"<< detections.size() << endl <<
+				 " OPTIMIZED X: " << OPTIMIZED_X << " OPTIMIZED_Y: " << OPTIMIZED_Y << endl <<
+				 " OPTIMIZED_PITCH: " << OPTIMIZED_PITCH << " OPTIMIZED_ROLL: " << OPTIMIZED_ROLL << " OPTIMIZED_YAW: " << OPTIMIZED_YAW << endl <<
+				 " Velocity_X: "<< delta_x/delta_t << " Velocity_Y: " << delta_y/delta_t << endl <<
+				 " Velocity_Mag: " << velmag << " Velocity_theta: " << veltheta << " Angular Velocity"<< delta_yaw/delta_t <<endl <<endl;
 
 		optimizedData << std::fixed << std::setprecision(3) <<
 			(clock() - start_s) / (double(CLOCKS_PER_SEC)) << ","
@@ -729,17 +807,16 @@ public:
 			<< endl;
 
 		//string for serial communication between pi and arduino
-		write_string = to_string_with_precision(OPTIMIZED_X) + "," + to_string_with_precision(OPTIMIZED_Y) + "," + to_string_with_precision(OPTIMIZED_PITCH) + "," +
-			to_string_with_precision(OPTIMIZED_ROLL) + "," + to_string_with_precision(OPTIMIZED_YAW) + "," + to_string_with_precision(delta_x/delta_t) + "," +
-			to_string_with_precision(delta_y/delta_t) + "," + to_string_with_precision(velmag) + "," + to_string_with_precision(veltheta) + "," +to_string_with_precision(delta_yaw/delta_t) + "*";
-
+		//write_string = to_string_with_precision(OPTIMIZED_X) + "," + to_string_with_precision(OPTIMIZED_Y) + "," + to_string_with_precision(OPTIMIZED_PITCH) + "," + to_string_with_precision(OPTIMIZED_ROLL) + "," + to_string_with_precision(OPTIMIZED_YAW) + "," + to_string_with_precision(delta_x/delta_t) + "," + to_string_with_precision(delta_y/delta_t) + "," + to_string_with_precision(velmag) + "," + to_string_with_precision(veltheta) + "," +to_string_with_precision(delta_yaw/delta_t) + "*";
 		}
 
+		if (acceptInput) {in.tail(1);}
+		if (in.getX() != NULL ||in.getY() != NULL ){
+		cout << "COOORDS:" << in.getX() << ',' << in.getY() << endl;
+		}
 
-		cout << "\nTAG SIZE" << Tags.size() << "\n";
+		if (!supressOutput){cout << "\nTAG SIZE" << Tags.size() << "\n";}
 		Tags.clear();
-
-
 
 		time_t t;
 		struct tm tm;
@@ -750,7 +827,7 @@ public:
 
 		//std::cout << std::setprecision(2)
 
-		std::cout << std::fixed << "Real Time: " << std::setprecision(3) << (clock() - start_s) / (double(CLOCKS_PER_SEC)) << std::endl;
+		if (!supressOutput){std::cout << std::fixed << "Real Time: " << std::setprecision(3) << (clock() - start_s) / (double(CLOCKS_PER_SEC)) << std::endl;}
 
 		// show the current image including any detections
 		if (m_draw) {
@@ -766,27 +843,99 @@ public:
 
 		}
 
+
+
+
 		// optionally send tag information to serial port (e.g. to Arduino)
 		if (m_arduino) {
 			if (detections.size() > 0) {
-				// only the first detected tag is sent out for now
-				Eigen::Vector3d translation;
-				Eigen::Matrix3d rotation;
-				detections[0].getRelativeTranslationRotation(m_tagSize, m_fx, m_fy, m_px, m_py,
-					translation, rotation);
-				/*
-				m_serial.print(detections[0].id);
-				m_serial.print(",");
-				m_serial.print(translation(0));
-				m_serial.print(",");
-				m_serial.print(translation(1));
-				m_serial.print(",");
-				m_serial.print(translation(2));
-				m_serial.print("*");
-				*/
+				bool m_degree = true;
+				bool m_tag = false;
+				bool m_forward = false;
+				if (m_degree){    //stay facing 0 degrees
+					if( (5.0 <= OPTIMIZED_YAW)&&(OPTIMIZED_YAW <= 180.0) && (delta_yaw/delta_t >= -1) ){
+						cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
+						write_string = "c";
+					}
+					else if( (-180.0 <= OPTIMIZED_YAW)&&(OPTIMIZED_YAW <= -5.0) && (delta_yaw/delta_t <= 1) ){
+						cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
+						write_string = "w";
+					}
+					else if( (-5.0 < OPTIMIZED_YAW)&&(OPTIMIZED_YAW < 5.0) && (delta_yaw/delta_t >=2.5) ){
+						cout << "CLOCKWISE THRUSTERS!!!!  TOWARDS" << endl;
+						write_string = "c";
+					}
+					else if( (-5.0 < OPTIMIZED_YAW)&&(OPTIMIZED_YAW < 5.0) && (delta_yaw/delta_t <=-2.5) ){
+						cout << "CLOCKWISE THRUSTERS!!!!  TOWARDS" << endl;
+						write_string = "w";
+					}
+					else{
+						cout << "Nothing Happening!!!      " << endl;
+						write_string = "n";
+					}
+				}
+				if (m_tag){     //stay at ID 0
+					int TAG = 0;
+					//double loc_x = coords[TAG][0];
+					//double loc_y = coords[TAG][1];
+					if (TAG>30){
+						cout<< "\nERROR: Tag "<< TAG<< " does not exit! Please enter a valid tag." <<endl;
+						abort();
+				   	}
+					double loc_x = 2.071; //4.117;
+					double loc_y = -0.089; //.217;
+					if ( (0 > loc_x) || (loc_x> 13.410) || (0 > loc_y) || (loc_y > 26.226) ){
+				   		cout <<"\nERROR: That location is out of bounds, please enter a valid x and y location." << endl;
+				   		abort();
+				   	}
+					if ( (loc_y-0.2 > OPTIMIZED_Y) && (delta_y/delta_t)<=2 ){
+						write_string = "f";
+						cout << "FORWARDS THRUSTERS!!!!" << endl;
+					}
+					else if ( (loc_x-1.0 > OPTIMIZED_X) && (delta_x/delta_t)<=2 ){
+						write_string = "r";
+						cout << "RIGHT THRUSTERS!!!!" << endl;
+					}
+					else if ( (loc_y+0.2 < OPTIMIZED_Y) && (delta_y/delta_t)>=-2 ){
+						write_string = "b";
+						cout << "BACKWARDS THRUSTERS!!!!" << endl;
+					}
+					else if ( (loc_x+1.0 < OPTIMIZED_X) && (delta_x/delta_t)>=-2 ){
+						write_string = "l";
+						cout << "LEFT THRUSTERS!!!!" << endl;
+					}
+					else{
+						cout<<"Do Nothing! " <<endl;
+						write_string = "n";
+					}
+				}
+				if (m_forward){   //move forward
+					if(-10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 10.0 && delta_y/delta_t <= 1){
+					    cout<<"Going Forward" << endl;
+					    write_string = "f";
+					}
+					else if( 10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 180.0 && delta_yaw/delta_t >= -1){
+					    cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
+					    write_string = "c";
+					}
+					else if(-180.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= -10.0 && delta_yaw/delta_t <= 1){
+					    cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
+					    write_string = "w";
+					}
+					else if(-10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 10.0 && delta_yaw/delta_t >=2){
+					    cout << "CLOCKWISE THRUSTERS!!!!  TOWARDS" << endl;
+					    write_string = "c";
+					}
+					else if(-10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 10.0 && delta_yaw/delta_t <=-2){
+					    cout << "CLOCKWISE THRUSTERS!!!!  TOWARDS" << endl;
+					    write_string = "w";
+					}
+					else{
+					cout << "Nothing Happening!!!      " << endl;
+					write_string = "n";
+					}
+				}
 				m_serial.print(write_string);
-				//m_serial.print("\n");
-
 			}
 			else {
 				// no tag detected: tag ID = -1
@@ -829,6 +978,8 @@ public:
 			// capture frame
 			m_cap >> image;
 
+			//cout << "testing" << endl;
+
 
 			if (calibrate) {
 				undistort(image, imageUndistorted, cameraMatrix, distortionCoefficients);
@@ -842,7 +993,7 @@ public:
 			frame++;
 			if (frame % 10 == 0) {
 				double t = tic();
-				cout << "  " << 10. / (t - last_t) << " fps" << endl;
+				if (!supressOutput){cout << "  " << 10. / (t - last_t) << " fps" << endl;}
 				last_t = t;
 			}
 
@@ -856,17 +1007,27 @@ public:
 
    // here is were everything begins
 int main(int argc, char* argv[]) {
+	readTagLocation();
+cout<<"TEST SIZE:   " << coords.size()<<endl;
+cout << "\nTEST COORDS MATRIX: " << coords.at(0)[0] << coords.at(1)[0] << coords.at(2)[0] << coords.at(0)[1] << coords.at(1)[1] << coords.at(2)[1]  << "\n";
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
+	AprilTags::Input in;
+
+
+
 	Demo demo;
-
-
 	// process command line options
 	demo.parseOptions(argc, argv);
 
+	if (acceptInput == true) {
+		cout << "Input Accepted." << endl;
+		in.setup(fp, coords);
+		//cout<<"START TEST: "<< coords[][2] <<endl;
+	}
 
-	demo.setup();
 
+	demo.setup(in);
 
 	//string filename = to_string(tm.tm_year + 1900);
 	string TOD = to_string(tm.tm_mon + 1) + "-"
@@ -880,6 +1041,10 @@ int main(int argc, char* argv[]) {
 	demo.openCSV(TOD, header, optimizedheader);
 	//ofstream a("test.csv");
 	//a << header;
+	cout<<"X TEST: " << coords.at(0)[0]<<endl;
+	if (supressOutput){
+		cout <<endl<< "OUTPUT SUPRESSED"<<endl<<endl;
+	}
 
 
 	if (demo.isVideo()) {

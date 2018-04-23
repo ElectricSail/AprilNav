@@ -1,0 +1,9 @@
+INPUT
+12
+7
+0
+1
+jhjh
+jhjh
+fff
+77
