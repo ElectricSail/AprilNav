@@ -491,7 +491,7 @@ public:
 			case 's':
 				supressOutput = true;
 				break;
-			case 'i':
+			case 'i':  // This does not work with Mac OS curently
 				acceptInput = true;
 				break;
 			case 'C':

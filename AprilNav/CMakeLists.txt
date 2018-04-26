@@ -4,26 +4,11 @@ link_libraries(apriltags)
 
 # Follow this format for adding new additions to the code using dependencies
 
-add_executable(apriltagscsv apriltagscsv.cpp Serial.cpp)
-pods_install_executables(apriltagscsv)
-
 add_executable(AprilNav AprilNav.cpp Serial.cpp)
 pods_install_executables(AprilNav)
 
-add_executable(StarTracker_testtags StarTracker_testtags.cpp Serial.cpp)
-pods_install_executables(StarTracker_testtags)
+add_executable(WaypointInput WaypointInput.cpp Serial.cpp)
+pods_install_executables(WaypointInput)
 
-add_executable(VideoTest VideoTest.cpp Serial.cpp)
-pods_install_executables(VideoTest)
-
-add_executable(SerialTest SerialTest.cpp Serial.cpp)
-pods_install_executables(SerialTest)
-
-add_executable(ThreadTest ThreadTest.cpp Serial.cpp)
-pods_install_executables(ThreadTest)
-
-add_executable(StarTrackerInput StarTrackerInput.cpp Serial.cpp)
-pods_install_executables(StarTrackerInput)
-
-add_executable(Pointers Pointers.cpp Serial.cpp)
-pods_install_executables(Pointers)
+add_executable(ATStripped ATStripped.cpp Serial.cpp)
+pods_install_executables(ATStripped)

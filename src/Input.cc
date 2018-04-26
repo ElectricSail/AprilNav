@@ -60,6 +60,12 @@ namespace AprilTags{
       //cout << "TagID: " << vect.at(0) << endl;
     }
 
+/*
+    else if (vect.size() == 0){
+      //do nothing?
+    }
+    */
+
     else{
       //cout << "\033[32mINVALID INPUT.\032[m" << endl;
       cout << "\033[0;33mINVALID INPUT.\033[0m" << endl;
@@ -138,7 +144,7 @@ namespace AprilTags{
 	cout << "TESTESTEST" << coords.at(1)[0] << endl;
 //cout << "\nTEST COORDS MATRIX: " << COORDS[0][0] << COORDS[1][0] << COORDS[2][0] << COORDS[0][1] << COORDS[1][1] << COORDS[2][1]  << "\n";
     fp = FP;
-    string command = "'./build/bin/StarTrackerInput' &";
+    string command = "'./build/bin/WaypointInput' &";
     string term = NEWTERMINAL + command;
     system(term.c_str());
     //FILE* fp;
