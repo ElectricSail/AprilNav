@@ -783,14 +783,14 @@ public:
 
 			cout << "OPTIMIZED X: " << OPTIMIZED_X << " OPTIMIZED_Y: " << OPTIMIZED_Y << " OPTIMIZED_PITCH: " << OPTIMIZED_PITCH
 				<< " OPTIMIZED_ROLL: " << OPTIMIZED_ROLL << " OPTIMIZED_YAW: " << OPTIMIZED_YAW << " Velocity_X: "<< delta_x/delta_t
-				<< " Velocity_Y: " << delta_y/delta_t << " Velocity_Mag: " << velmag << " Velocity_theta: " << veltheta << "Angular Velocity"<< delta_yaw/delta_t <<endl;
+				<< " Velocity_Y: " << delta_y/delta_t << " Velocity_Mag: " << velmag << " Velocity_theta: " << veltheta << " Angular Velocity "<< delta_yaw/delta_t <<endl;
 }
 				OUTPUT << std::fixed << std::setprecision(3) <<
 				 " Tags detected:"<< detections.size() << endl <<
 				 " OPTIMIZED X: " << OPTIMIZED_X << " OPTIMIZED_Y: " << OPTIMIZED_Y << endl <<
 				 " OPTIMIZED_PITCH: " << OPTIMIZED_PITCH << " OPTIMIZED_ROLL: " << OPTIMIZED_ROLL << " OPTIMIZED_YAW: " << OPTIMIZED_YAW << endl <<
 				 " Velocity_X: "<< delta_x/delta_t << " Velocity_Y: " << delta_y/delta_t << endl <<
-				 " Velocity_Mag: " << velmag << " Velocity_theta: " << veltheta << " Angular Velocity"<< delta_yaw/delta_t <<endl <<endl;
+				 " Velocity_Mag: " << velmag << " Velocity_theta: " << veltheta << " Angular Velocity "<< delta_yaw/delta_t <<endl <<endl;
 
 		optimizedData << std::fixed << std::setprecision(3) <<
 			(clock() - start_s) / (double(CLOCKS_PER_SEC)) << ","
@@ -1007,6 +1007,11 @@ public:
 
    // here is were everything begins
 int main(int argc, char* argv[]) {
+	#ifdef __arm__
+	printf("Detected Raspberry Pi\n");
+	#define NEWTERMINAL "xterm -e "
+	#endif
+
 	readTagLocation();
 cout<<"TEST SIZE:   " << coords.size()<<endl;
 cout << "\nTEST COORDS MATRIX: " << coords.at(0)[0] << coords.at(1)[0] << coords.at(2)[0] << coords.at(0)[1] << coords.at(1)[1] << coords.at(2)[1]  << "\n";

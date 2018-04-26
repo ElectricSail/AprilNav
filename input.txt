@@ -1,9 +1,8 @@
 INPUT
-12
-7
-0
+dfg
+88
+fgh
+66
+2
 1
-jhjh
-jhjh
-fff
-77
+3

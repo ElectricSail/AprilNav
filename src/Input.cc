@@ -1,6 +1,7 @@
 //For inputing with April Tags using a second window
 #include "Input.h"
 #include <iostream>
+#include <sstream>
 
 #ifdef __APPLE__
 #define NEWTERMINAL "open -a Terminal -n "
@@ -11,13 +12,12 @@
 #endif
 
 #ifdef __arm__
-printf("Detected Raspberry Pi\n");
 #define NEWTERMINAL "xterm -e "
 #endif
 
 #define SIZE 100
 
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
 
 char oldwp[255];  //for checking if there is a new waypoint
 
@@ -104,7 +104,8 @@ namespace AprilTags{
 
       // print last n lines
       while (fgets(wp, sizeof(wp), fp)){
-        if (strcmp(wp,oldwp) != 0){
+        //if (strcmp(wp,oldwp) != 0){
+        if (wp != oldwp){
           //printf("NEW WP: %s", wp);
           inputParse(wp);
         }
