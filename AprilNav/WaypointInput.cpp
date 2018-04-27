@@ -1,3 +1,7 @@
+/* Accepts input waypoint input from a user. Input.cc parses the Input
+ * to determine if a valid coordinate or tag id was entered
+ */
+
 #include <string>
 #include <iostream>
 #include <thread>
@@ -12,7 +16,6 @@ int main(){
 
   input.open("input.txt");
   input << "INPUT" << endl;
-
   string WP;
 
   while(true){
@@ -20,5 +23,4 @@ int main(){
     cin >> WP;
     input << WP << endl;
   }
-
 }

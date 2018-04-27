@@ -5,8 +5,6 @@
 *
 * Adapted by Tristan Schuler and Greta Studier of NASA MSFC for Electric Sail simulations
 *
-*
-*
 * Opens the first available camera (typically a built in camera in a
 * laptop) and continuously detects April tags in the incoming
 * images. Detections are both visualized in the live image and shown
@@ -47,8 +45,6 @@ using namespace std;
 #include <errno.h>
 #endif
 
-// OpenCV library for easy access to USB camera and drawing of images
-// on screen
 #include "opencv2/opencv.hpp"
 
 // April tags detector and various families that can be selected by command line option
@@ -59,17 +55,25 @@ using namespace std;
 #include "AprilTags/Tag36h9.h"
 #include "AprilTags/Tag36h11.h"
 #include "AprilTags/Input.h"
+#include "AprilTags/TagOptimization.h"
 
 using namespace cv;
 
+const string intro = "\n"
+"AprilNav v1.0.0\n"
+"Authors: Tristan Schuler & Greta Studier\n"
+"(C) 2018 NASA-MSFC\n"
+"\n";
+
 //Stores Tag information for Optimization
+//double coords[30][2] = {};
 FILE* fp;
 bool m_coordinates(true);
 //Coordinates
 vector <array<double,2> > coords;
 
 //Stores Tag information for Optimization
-
+/*
 class TagOptimization {
 
 public:
@@ -93,6 +97,7 @@ public:
 		pitch = PITCH;
 		roll = ROLL;
 		yaw = YAW;
+
 		//Determine QR's coordinates given ID
 		QR_X = coords.at(tagID)[0];
 		QR_Y = coords.at(tagID)[1];
@@ -108,7 +113,6 @@ public:
 		yaw = yaw * 180 / M_PI;
 
 	}
-
 	friend ostream& operator<<(ostream& os, const TagOptimization& t);
 };
 
@@ -120,6 +124,8 @@ ostream& operator<<(ostream& os, const TagOptimization& t)
 		<< t.CAMERA_X << "," << t.CAMERA_Y << "\n";
 	return os;
 }
+
+*/
 
 const string usage = "\n"
 "Usage:\n"
@@ -144,14 +150,6 @@ const string usage = "\n"
 "  -X <calibrate>  Calibrate camera (give txt file) \n"
 "\n";
 
-const string intro = "\n"
-"April Tags Coordinate System Adaptation Example\n"
-"Author: by Michael Kaess of MIT\n"
-"Adapted by Tristan Schuler & Greta Studier\n"
-"(C) 2018 NASA-MSFC\n"
-"\n";
-
-
 // Needed for getopt / command line options processing
 #include <unistd.h>
 extern int optind;
@@ -162,7 +160,9 @@ int start_s = clock();
 // For Arduino: locally defined serial port access class
 #include "Serial.h"
 
-const char* windowName = "AprilNav";
+
+const char* windowName = "apriltags_demo";
+
 
 // utility function to provide current system time (used below in
 // determining frame rate at which images are being processed)
@@ -221,6 +221,8 @@ void readTagLocation(){
 		    string x_loc;   //can't use double or won't recognize 'getline'
 		    string y_loc;
 
+		    //coords[30][2] = {};
+		    //string x_loc[3][0];
 		    while(data.good()){
 		        for (int i = 0; i < 30; i++){
 		            getline(data, x_loc, ',');
@@ -235,7 +237,9 @@ void readTagLocation(){
 		            if ( !(converty >> y) )
 		                y = 0;
 
-                    coords.push_back({x,y});
+		            //coords[i][0] = {x};
+		            //coords[i][1] = {y};
+								coords.push_back({x,y});
 
 		        }
 		    }
@@ -253,6 +257,7 @@ class Demo {
 	bool m_draw; // draw image and April tag detections?
 	bool m_arduino; // send tag detections to serial port?
 	bool m_timing; // print timing information for each tag extraction call
+	//bool m_coordinates; //tag coordinates in csv file
 
 	int m_width; // image size in pixels
 	int m_height;
@@ -310,7 +315,7 @@ public:
 	double OPTIMIZED_PITCH = 0;
 	double OPTIMIZED_ROLL = 0;
 	double OPTIMIZED_YAW = 0;
-	vector<TagOptimization> Tags;
+	vector<AprilTags::TagOptimization> Tags;
 	Mat cameraMatrix;
 	Mat distortionCoefficients;
 	AprilTags::Input in;
@@ -406,17 +411,23 @@ public:
 					inStream >> read;
 					distortionCoefficients.at<double>(r, c) = read;
 					//cout << distortionCoefficients.at<double>(r, c) << endl;
+
 				}
 			}
+
 			inStream.close();
 			cout << "Camera Calibrated!" << endl;
 			//cout << "Camera Matrix: " << cameraMatrix << endl;
 			//cout << "Distortion Coefficients: " << distortionCoefficients << endl;
 			return true;
+
 		}
+
 		cout << name << " not found." << endl;
 		return false;
 	}
+
+
 
 
 	// changing the tag family
@@ -650,9 +661,10 @@ public:
 			<< yaw << ","
 			<< endl;
 
-		//TagOptimization(TIME, TAGID, X, Y, PITCH, ROLL, YAW)
-		TagOptimization t((clock() - start_s) / (double(CLOCKS_PER_SEC)), detection.id, translation(1)*1,
-			translation(2), pitch, roll, yaw);
+		AprilTags::TagOptimization t;
+		//TagOptimization t((clock() - start_s) / (double(CLOCKS_PER_SEC)), detection.id, translation(1)*1, translation(2), pitch, roll, yaw);
+		t.set((clock() - start_s) / (double(CLOCKS_PER_SEC)), detection.id, translation(1)*1, translation(2), pitch, roll, yaw, coords);
+		t.optimize();
 		Tags.push_back(t);
 
 		innerctr++;
@@ -660,6 +672,8 @@ public:
 			innerctr = 0;
 			ctr++;
 		}
+
+
 
 		// Also note that for SLAM/multi-view application it is better to
 		// use reprojection error of corner points, because the noise in
@@ -704,13 +718,12 @@ public:
 
 		//Iterate over list of Tags to determine real position
 		for (int i = 0; i < Tags.size(); i++) {
-			OPTIMIZED_X += Tags[i].CAMERA_X;
-			OPTIMIZED_Y += Tags[i].CAMERA_Y;
-			OPTIMIZED_PITCH += Tags[i].pitch;
-			OPTIMIZED_ROLL += Tags[i].roll;
-			OPTIMIZED_YAW += Tags[i].yaw;
+			OPTIMIZED_X += Tags.at(i).getCamera_X();
+			OPTIMIZED_Y += Tags.at(i).getCamera_Y();
+			OPTIMIZED_PITCH += Tags.at(i).getPitch();
+			OPTIMIZED_ROLL += Tags.at(i).getRoll();
+			OPTIMIZED_YAW += Tags.at(i).getYaw();
 		}
-
 
 		if (OPTIMIZED_X != NULL) {
 			OPTIMIZED_X = (OPTIMIZED_X / Tags.size());
@@ -799,6 +812,9 @@ public:
 		struct tm * tmp;
 
 		t = mktime(&tm);
+		//tmp = localtime(t);
+
+		//std::cout << std::setprecision(2)
 
 		if (!supressOutput){std::cout << std::fixed << "Real Time: " << std::setprecision(3) << (clock() - start_s) / (double(CLOCKS_PER_SEC)) << std::endl;}
 
@@ -815,6 +831,9 @@ public:
 			imshow(windowName, image); // OpenCV call
 
 		}
+
+
+
 
 		// optionally send tag information to serial port (e.g. to Arduino)
 		if (m_arduino) {
@@ -940,6 +959,7 @@ public:
 		cv::Mat image_gray;
 		cv::Mat imageUndistorted;
 
+
 		int frame = 0;
 		double last_t = tic();
 		while (true) {
@@ -948,6 +968,7 @@ public:
 			m_cap >> image;
 
 			//cout << "testing" << endl;
+
 
 			if (calibrate) {
 				undistort(image, imageUndistorted, cameraMatrix, distortionCoefficients);
@@ -981,11 +1002,13 @@ int main(int argc, char* argv[]) {
 	#endif
 
 	readTagLocation();
-    cout<<"TEST SIZE:   " << coords.size()<<endl;
-    cout << "\nTEST COORDS MATRIX: " << coords.at(0)[0] << coords.at(1)[0] << coords.at(2)[0] << coords.at(0)[1] << coords.at(1)[1] << coords.at(2)[1]  << "\n";
+cout<<"TEST SIZE:   " << coords.size()<<endl;
+cout << "\nTEST COORDS MATRIX: " << coords.at(0)[0] << coords.at(1)[0] << coords.at(2)[0] << coords.at(0)[1] << coords.at(1)[1] << coords.at(2)[1]  << "\n";
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 	AprilTags::Input in;
+
+
 
 	Demo demo;
 	// process command line options
