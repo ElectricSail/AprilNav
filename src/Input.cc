@@ -1,4 +1,4 @@
-//For inputing with April Tags using a second window
+ //For inputing with April Tags using a second window
 #include "Input.h"
 #include <iostream>
 #include <sstream>

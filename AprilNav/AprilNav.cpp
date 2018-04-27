@@ -63,7 +63,6 @@ using namespace std;
 using namespace cv;
 
 //Stores Tag information for Optimization
-//double coords[30][2] = {};
 FILE* fp;
 bool m_coordinates(true);
 //Coordinates
@@ -84,11 +83,6 @@ public:
 	double CAMERA_X, CAMERA_Y, CAMERA_Z; //Meters
 	double X_Rot, Y_Rot;
 
-										 //Unique coordinate system, You must precisely measure the location of your coordinates in 3D space.
-										 //The index of a coordinate applys to the tag id. Currently only accounts for [X,Y]
-	//double coordinates[9][2] = { { 4.117,1.217 },{ 1.446,3.442 },{ 4.141,5.089 },{ 0,0 },{ 0,0 },{ 0,-.7 },{ 0,1 },{ 0,0 },{ 0,0 } };
-	//Wall coordinates
-	//double coordinates[36][2] = { { 0,0 },{ -1.5,0 },{ 1.5,0 },{ 0,0 },{ 0,1 },{ 0,-.755 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 },{ 0,1 },{ 0,0 },{ 0,0 } };
 
 	TagOptimization(double TIME, int TAGID, double x, double y, double PITCH, double ROLL, double YAW)
 	{
@@ -168,9 +162,7 @@ int start_s = clock();
 // For Arduino: locally defined serial port access class
 #include "Serial.h"
 
-
-const char* windowName = "apriltags_demo";
-
+const char* windowName = "AprilNav";
 
 // utility function to provide current system time (used below in
 // determining frame rate at which images are being processed)
@@ -179,9 +171,6 @@ double tic() {
 	gettimeofday(&t, NULL);
 	return ((double)t.tv_sec + ((double)t.tv_usec) / 1000000.);
 }
-
-
-
 
 #include <cmath>
 
@@ -232,8 +221,6 @@ void readTagLocation(){
 		    string x_loc;   //can't use double or won't recognize 'getline'
 		    string y_loc;
 
-		    //coords[30][2] = {};
-		    //string x_loc[3][0];
 		    while(data.good()){
 		        for (int i = 0; i < 30; i++){
 		            getline(data, x_loc, ',');
@@ -248,9 +235,7 @@ void readTagLocation(){
 		            if ( !(converty >> y) )
 		                y = 0;
 
-		            //coords[i][0] = {x};
-		            //coords[i][1] = {y};
-								coords.push_back({x,y});
+                    coords.push_back({x,y});
 
 		        }
 		    }
@@ -268,7 +253,6 @@ class Demo {
 	bool m_draw; // draw image and April tag detections?
 	bool m_arduino; // send tag detections to serial port?
 	bool m_timing; // print timing information for each tag extraction call
-	//bool m_coordinates; //tag coordinates in csv file
 
 	int m_width; // image size in pixels
 	int m_height;
@@ -422,23 +406,17 @@ public:
 					inStream >> read;
 					distortionCoefficients.at<double>(r, c) = read;
 					//cout << distortionCoefficients.at<double>(r, c) << endl;
-
 				}
 			}
-
 			inStream.close();
 			cout << "Camera Calibrated!" << endl;
 			//cout << "Camera Matrix: " << cameraMatrix << endl;
 			//cout << "Distortion Coefficients: " << distortionCoefficients << endl;
 			return true;
-
 		}
-
 		cout << name << " not found." << endl;
 		return false;
 	}
-
-
 
 
 	// changing the tag family
@@ -683,8 +661,6 @@ public:
 			ctr++;
 		}
 
-
-
 		// Also note that for SLAM/multi-view application it is better to
 		// use reprojection error of corner points, because the noise in
 		// this relative pose is very non-Gaussian; see iSAM source code
@@ -823,9 +799,6 @@ public:
 		struct tm * tmp;
 
 		t = mktime(&tm);
-		//tmp = localtime(t);
-
-		//std::cout << std::setprecision(2)
 
 		if (!supressOutput){std::cout << std::fixed << "Real Time: " << std::setprecision(3) << (clock() - start_s) / (double(CLOCKS_PER_SEC)) << std::endl;}
 
@@ -842,9 +815,6 @@ public:
 			imshow(windowName, image); // OpenCV call
 
 		}
-
-
-
 
 		// optionally send tag information to serial port (e.g. to Arduino)
 		if (m_arduino) {
@@ -970,7 +940,6 @@ public:
 		cv::Mat image_gray;
 		cv::Mat imageUndistorted;
 
-
 		int frame = 0;
 		double last_t = tic();
 		while (true) {
@@ -979,7 +948,6 @@ public:
 			m_cap >> image;
 
 			//cout << "testing" << endl;
-
 
 			if (calibrate) {
 				undistort(image, imageUndistorted, cameraMatrix, distortionCoefficients);
@@ -1013,13 +981,11 @@ int main(int argc, char* argv[]) {
 	#endif
 
 	readTagLocation();
-cout<<"TEST SIZE:   " << coords.size()<<endl;
-cout << "\nTEST COORDS MATRIX: " << coords.at(0)[0] << coords.at(1)[0] << coords.at(2)[0] << coords.at(0)[1] << coords.at(1)[1] << coords.at(2)[1]  << "\n";
+    cout<<"TEST SIZE:   " << coords.size()<<endl;
+    cout << "\nTEST COORDS MATRIX: " << coords.at(0)[0] << coords.at(1)[0] << coords.at(2)[0] << coords.at(0)[1] << coords.at(1)[1] << coords.at(2)[1]  << "\n";
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 	AprilTags::Input in;
-
-
 
 	Demo demo;
 	// process command line options
