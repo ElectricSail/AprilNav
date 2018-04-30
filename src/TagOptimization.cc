@@ -15,17 +15,18 @@ namespace AprilTags{
 		//Determine QR's coordinates given ID
 		QR_X = coords.at(tagID)[0];
 		QR_Y = coords.at(tagID)[1];
+
+		//Coordinate System has to be rotated to account for orientation of camera
+		X_Rot = X*cos(yaw) - Y*sin(yaw);
+		Y_Rot = Y*cos(yaw) + X*sin(yaw);
+		CAMERA_X = QR_X - X_Rot;
+		CAMERA_Y = QR_Y - Y_Rot;
+
 		//Determine Camera Position in relation to QR Coordinate
 		//convert radians to degrees
 		pitch = pitch * 180 / M_PI;
 		roll = roll * 180 / M_PI;
 		yaw = yaw * 180 / M_PI;
-		//Coordinate System has to be rotated to account for orientation of camera
-
-		X_Rot = X*cos(yaw) - Y*sin(yaw);
-		Y_Rot = Y*cos(yaw) + X*sin(yaw);
-		CAMERA_X = QR_X - X_Rot;
-		CAMERA_Y = QR_Y - Y_Rot;
 	}
 
 	void TagOptimization::print() {
