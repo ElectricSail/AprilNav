@@ -239,9 +239,6 @@ public:
 template <class T>
 std::string to_string_with_precision(const T a_value, const int n = 3)
 {
-	//std::ostringstream out;
-	//out << std::setprecision(n) << a_value;
-	//return out.str();
 	stringstream stream;
 	stream << fixed << setprecision(n) << a_value;
 	return stream.str();
@@ -429,7 +426,6 @@ void setup(AprilTags::Input IN) {
 
 	// optional: prepare serial port for communication with Arduino
 	if (m_arduino) {
-		//m_serial.open("/dev/ttyACM0", 57600);
 		m_serial.open("/dev/ttyUSB0", 9600);
 	}
 }
@@ -551,8 +547,6 @@ void print_detection(AprilTags::TagDetection& detection) {
 		}
 
 		void processImage(cv::Mat& image, cv::Mat& image_gray) {
-
-			//test << getDISTANCE() << "test" << endl;
 			// alternative way is to grab, then retrieve; allows for
 			// multiple grab when processing below frame rate - v4l keeps a
 			// number of frames buffered, which can lead to significant lag
@@ -704,12 +698,10 @@ void print_detection(AprilTags::TagDetection& detection) {
 				}
 				else {
 					// no tag detected: tag ID = -1
-					//m_serial.print("NO INFO,NO INFO,NO INFO,NO INFO,NO INFO,NO INfo,NO INFO,NO INFO,NO INfo*");
 					m_serial.print("^");
 				}
 			}
 		}
-
 
 		// Load and process a single image
 		void loadImages() {
@@ -773,6 +765,7 @@ int main(int argc, char* argv[]) {
 	#endif
 
     c.readTagLocation();
+    
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 	AprilTags::Input in;
