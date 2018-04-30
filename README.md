@@ -1,4 +1,4 @@
-<img src="AT.png" align="right" />
+<img src="AprilNavLogo.jpg" align="right" />
 
 ## AprilNav
 
