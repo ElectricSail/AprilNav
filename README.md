@@ -4,25 +4,11 @@
 
 ## Overview
 
-Detect April tags (2D bar codes) in images; reports unique ID of each
-detection, and optionally its position and orientation relative to a
-calibrated camera.
+AprilnNav is a mobile indoor real-time landmark navigation system. Using printable 2D barcodes, a HD
+camera, and a computer, AprilNav is a low cost, scalable, and accurate system for vehicular autonomous
+navigation and localization. Matrices or 2D barcodes mounted on the ceiling of a room act as a navigation system for a camera located anywhere in the same room with up to 5cm of accuracy. AprilNav has wide range of applications from from robotics education to manufacturing and warehouse vehicles and facilities.
 
-See examples/apriltags_demo.cpp for a simple example that detects
-April tags (see tags/pdf/tag36h11.pdf) in laptop or webcam images and
-marks any tags in the live image.
-
-Ubuntu dependencies:
-sudo apt-get install subversion cmake libopencv-dev libeigen3-dev libv4l-dev
-
-Mac dependencies:
-sudo port install pkgconfig opencv eigen3
-
-Uses the pods build system in connection with cmake, see:
-http://sourceforge.net/p/pods/
-
-Michael Kaess
-October 2012
+Our team at NASA - MSFC has adapted code (AprilTags) originally created by Edward Olson at University of Michigan and adapted by additional authors at Carnegie Mellon and MIT under the LGPL 2.1 license. AprilTags outputs the location of multiple 2D barcodes located anywhere in 3D space. AprilNav expands upon the AprilTags library by instead estimating the pose of a camera given known coordinates of unique tags. 
 
 ### Prerequisites
 
@@ -36,7 +22,7 @@ This program has also sucessfully ran on Mac OS but requires homebrew to install
 
 ### Installing
 
-Once installed, navigate to the directory and compile with:
+Once installed, navigate to the AprilNav directory and compile with:
 
 ```
 make
@@ -45,7 +31,7 @@ make
 After compiling, run with:
 
 ```
-./build/bin/StarTracker
+./build/bin/AprilNav
 ```
 
 ## Project History
@@ -60,26 +46,12 @@ framework by Jeffrey Boyland and David Touretzky.
 See this Tekkotsu wiki article for additional links and references:
   http://wiki.tekkotsu.org/index.php/AprilTags
 
+
+Michael Kaess (kaess@mit.edu) and Hordur Johannson (hordurj@mit.edu) of MIT
+further modified the code and made a standalone library for AprilTags:
+http://people.csail.mit.edu/kaess/apriltags/
+
 ----------------------------
-
-This C++ code was further modified by
-Michael Kaess (kaess@mit.edu) and Hordur Johannson (hordurj@mit.edu)
-and the code has been released under the LGPL 2.1 license.
-
-- converted to standalone library
-- added stable homography recovery using OpenCV
-- robust tag code table that does not require a terminating 0
-  (omission results in false positives by illegal codes being accepted)
-- changed example tags to agree with Ed Olson's Java version and added
-  all his other tag families
-- added principal point as parameter as in original code - essential
-  for homography
-- added some debugging code (visualization using OpenCV to show
-  intermediate detection steps)
-- added fast approximation of arctan2 from Ed's original Java code
-- using interpolation instead of homography in Quad: requires less
-  homography computations and provides a small improvement in correct
-  detections
 
 todo:
 - significant speedup could be achieved by performing image operations
