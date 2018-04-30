@@ -1,10 +1,12 @@
+<img src="AT.png" align="right" />
+
 ## AprilNav
 
 [![license](https://img.shields.io/badge/license-LGPL%202.1-blue.svg)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html)
 
 ## Overview
 
-AprilnNav is a mobile indoor real-time landmark navigation system. Using printable 2D barcodes, a HD
+AprilNav is a mobile indoor real-time landmark navigation system. Using printable 2D barcodes, a HD
 camera, and a computer, AprilNav is a low cost, scalable, and accurate system for vehicular autonomous
 navigation and localization. Matrices or 2D barcodes mounted on the ceiling of a room act as a navigation system for a camera located anywhere in the same room with up to 5cm of accuracy. AprilNav has wide range of applications from from robotics education to manufacturing and warehouse vehicles and facilities.
 
@@ -15,10 +17,14 @@ Our team at NASA - MSFC has adapted code (AprilTags) originally created by Edwar
 Install the following dependencies to run the program (The following was tested on Ubuntu 12.04 and Raspberry Pi running Raspian: 
 
 ```
-sudo apt-get install subversion cmake libopencv-dev libeigen3-dev libv4l-dev
+sudo apt-get install subversion cmake libopencv-dev libeigen3-dev libv4l-dev xterm
 ```
 
-This program has also sucessfully ran on Mac OS but requires homebrew to install the proper packages. 
+To install on Mac OS using homebrew:
+```
+sudo port install pkgconfig opencv eigen3
+```
+
 
 ### Installing
 
@@ -33,6 +39,8 @@ After compiling, run with:
 ```
 ./build/bin/AprilNav
 ```
+
+***Note: Be sure to specify he propper tag size using the -S flag. Display a list of additional customizations using the -h flag
 
 ## Project History
 
