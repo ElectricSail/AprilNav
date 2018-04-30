@@ -1,5 +1,6 @@
 #include <iostream>
 #include "TagOptimization.h"
+#include "Coordinates.h"
 #include <cmath>
 #include <vector>
 #include <array>

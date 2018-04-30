@@ -56,9 +56,11 @@ using namespace std;
 #include "AprilTags/Tag36h11.h"
 #include "AprilTags/Input.h"
 #include "AprilTags/TagOptimization.h"
+#include "AprilTags/Coordinates.h"
 #include "Serial.h"
 
 using namespace cv;
+AprilTags::Coordinates c;
 
 const string intro = "\n"
 "AprilNav v1.0.0\n"
@@ -69,8 +71,6 @@ const string intro = "\n"
 const char* windowName = "AprilNav 1.0.0";
 
 FILE* fp;
-bool m_coordinates(true);
-vector <array<double,2> > coords; //Array of Coordinates
 
 //CSV Headers for output data files
 string header = "Count,Time,Tag ID,Distance,X,Y,Z,Pitch,Roll,Yaw\n";
@@ -143,38 +143,6 @@ void wRo_to_euler(const Eigen::Matrix3d& wRo, double& yaw, double& pitch, double
 
 bool supressOutput = false;
 bool acceptInput = false;
-
-//Read tag coordinates from a CSV file. AprilNav won't run without a Coordinates.csv file present
-void readTagLocation(){
-	if(m_coordinates){
-		ifstream data("AprilNav/Coordinates.csv");
-		if(!data.is_open()) std::cout << "\nERROR: Can't find file with tag coordinates (Coordinates.csv)! \n" << '\n';
-		if(!data.is_open()){    //abort if can't find file
-		abort();
-	}
-	string x_loc;   //can't use double or won't recognize 'getline'
-	string y_loc;
-
-	while(data.good()){
-		for (int i = 0; i < 30; i++){
-			getline(data, x_loc, ',');
-			getline(data, y_loc, '\n');
-
-			double x;
-			istringstream convertx(x_loc);
-			if ( !(convertx >> x) )
-			x = 0;
-			double y;
-			istringstream converty(y_loc);
-			if ( !(converty >> y) )
-			y = 0;
-
-			coords.push_back({x,y});
-		}
-	}
-	data.close();
-}
-}
 
 class Demo {
 
@@ -311,7 +279,6 @@ bool loadCameraCalibration(string name) {
 				double read = 0.0f;
 				inStream >> read;
 				cameraMatrix.at<double>(r, c) = read;
-				//cout << cameraMatrix.at<double>(r, c) << endl;
 			}
 		}
 
@@ -327,13 +294,10 @@ bool loadCameraCalibration(string name) {
 				double read = 0.0f;
 				inStream >> read;
 				distortionCoefficients.at<double>(r, c) = read;
-				//cout << distortionCoefficients.at<double>(r, c) << endl;
 			}
 		}
 		inStream.close();
 		cout << "Camera Calibrated!" << endl;
-		//cout << "Camera Matrix: " << cameraMatrix << endl;
-		//cout << "Distortion Coefficients: " << distortionCoefficients << endl;
 		return true;
 	}
 
@@ -570,7 +534,7 @@ void print_detection(AprilTags::TagDetection& detection) {
 			<< endl;
 
 			AprilTags::TagOptimization t;
-			t.set((clock() - start_s) / (double(CLOCKS_PER_SEC)), detection.id, translation(1)*1, translation(2), pitch, roll, yaw, coords);
+    t.set((clock() - start_s) / (double(CLOCKS_PER_SEC)), detection.id, translation(1)*1, translation(2), pitch, roll, yaw, c.coords);
 			t.optimize();
 			Tags.push_back(t);
 
@@ -731,97 +695,12 @@ void print_detection(AprilTags::TagDetection& detection) {
 				imshow(windowName, image); //Show AprilNav window
 			}
 
-			/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////GRETA
 			// optionally send tag information to serial port (e.g. to Arduino)
 			if (m_arduino) {
 				if (detections.size() > 0) {
-					bool m_degree = true;
-					bool m_tag = false;
-					bool m_forward = false;
-					if (m_degree){    //stay facing 0 degrees
-						if( (5.0 <= OPTIMIZED_YAW)&&(OPTIMIZED_YAW <= 180.0) && (delta_yaw/delta_t >= -1) ){
-							cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
-							write_string = "c";
-						}
-						else if( (-180.0 <= OPTIMIZED_YAW)&&(OPTIMIZED_YAW <= -5.0) && (delta_yaw/delta_t <= 1) ){
-							cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
-							write_string = "w";
-						}
-						else if( (-5.0 < OPTIMIZED_YAW)&&(OPTIMIZED_YAW < 5.0) && (delta_yaw/delta_t >=2.5) ){
-							cout << "CLOCKWISE THRUSTERS!!!!  TOWARDS" << endl;
-							write_string = "c";
-						}
-						else if( (-5.0 < OPTIMIZED_YAW)&&(OPTIMIZED_YAW < 5.0) && (delta_yaw/delta_t <=-2.5) ){
-							cout << "CLOCKWISE THRUSTERS!!!!  TOWARDS" << endl;
-							write_string = "w";
-						}
-						else{
-							cout << "Nothing Happening!!!      " << endl;
-							write_string = "n";
-						}
-					}
-					if (m_tag){     //stay at ID 0
-						int TAG = 0;
-						//double loc_x = coords[TAG][0];
-						//double loc_y = coords[TAG][1];
-						if (TAG>30){
-							cout<< "\nERROR: Tag "<< TAG<< " does not exit! Please enter a valid tag." <<endl;
-							abort();
-						}
-						double loc_x = 2.071; //4.117;
-						double loc_y = -0.089; //.217;
-						if ( (0 > loc_x) || (loc_x> 13.410) || (0 > loc_y) || (loc_y > 26.226) ){
-							cout <<"\nERROR: That location is out of bounds, please enter a valid x and y location." << endl;
-							abort();
-						}
-						if ( (loc_y-0.2 > OPTIMIZED_Y) && (delta_y/delta_t)<=2 ){
-							write_string = "f";
-							cout << "FORWARDS THRUSTERS!!!!" << endl;
-						}
-						else if ( (loc_x-1.0 > OPTIMIZED_X) && (delta_x/delta_t)<=2 ){
-							write_string = "r";
-							cout << "RIGHT THRUSTERS!!!!" << endl;
-						}
-						else if ( (loc_y+0.2 < OPTIMIZED_Y) && (delta_y/delta_t)>=-2 ){
-							write_string = "b";
-							cout << "BACKWARDS THRUSTERS!!!!" << endl;
-						}
-						else if ( (loc_x+1.0 < OPTIMIZED_X) && (delta_x/delta_t)>=-2 ){
-							write_string = "l";
-							cout << "LEFT THRUSTERS!!!!" << endl;
-						}
-						else{
-							cout<<"Do Nothing! " <<endl;
-							write_string = "n";
-						}
-					}
-					if (m_forward){   //move forward
-						if(-10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 10.0 && delta_y/delta_t <= 1){
-							cout<<"Going Forward" << endl;
-							write_string = "f";
-						}
-						else if( 10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 180.0 && delta_yaw/delta_t >= -1){
-							cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
-							write_string = "c";
-						}
-						else if(-180.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= -10.0 && delta_yaw/delta_t <= 1){
-							cout << "CLOCKWISE THRUSTERS!!!!  AWAY" << endl;
-							write_string = "w";
-						}
-						else if(-10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 10.0 && delta_yaw/delta_t >=2){
-							cout << "CLOCKWISE THRUSTERS!!!!  TOWARDS" << endl;
-							write_string = "c";
-						}
-						else if(-10.0 <= (OPTIMIZED_YAW)&&(OPTIMIZED_YAW) <= 10.0 && delta_yaw/delta_t <=-2){
-							cout << "CLOCKWISE THRUSTERS!!!!  TOWARDS" << endl;
-							write_string = "w";
-						}
-						else{
-							cout << "Nothing Happening!!!      " << endl;
-							write_string = "n";
-						}
-					}
-					m_serial.print(write_string);
+                    write_string = to_string_with_precision(OPTIMIZED_X) + "," + to_string_with_precision(OPTIMIZED_Y) + "," + to_string_with_precision(OPTIMIZED_PITCH) + "," + to_string_with_precision(OPTIMIZED_ROLL) + "," + to_string_with_precision(OPTIMIZED_YAW) + "," + to_string_with_precision(delta_x/delta_t) + "," + to_string_with_precision(delta_y/delta_t) + "," + to_string_with_precision(velmag) + "," + to_string_with_precision(veltheta) + "," +to_string_with_precision(delta_yaw/delta_t) + "*";
+					
+                    m_serial.print(write_string);
 				}
 				else {
 					// no tag detected: tag ID = -1
@@ -831,7 +710,6 @@ void print_detection(AprilTags::TagDetection& detection) {
 			}
 		}
 
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		// Load and process a single image
 		void loadImages() {
@@ -894,9 +772,7 @@ int main(int argc, char* argv[]) {
 	#define NEWTERMINAL "xterm -e "
 	#endif
 
-	readTagLocation();
-	cout<<"TEST SIZE:   " << coords.size()<<endl;
-	cout << "\nTEST COORDS MATRIX: " << coords.at(0)[0] << coords.at(1)[0] << coords.at(2)[0] << coords.at(0)[1] << coords.at(1)[1] << coords.at(2)[1]  << "\n";
+    c.readTagLocation();
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 	AprilTags::Input in;
@@ -907,7 +783,7 @@ int main(int argc, char* argv[]) {
 
 	if (acceptInput == true) {
 		cout << "Input Accepted." << endl;
-		in.setup(fp, coords);
+		in.setup(fp, c.coords);
 	}
 
 	demo.setup(in);
@@ -918,9 +794,6 @@ int main(int argc, char* argv[]) {
 	+ "_" + to_string(tm.tm_min) + "_" + to_string(tm.tm_sec);
 
 	demo.openCSV(TOD, header, optimizedheader);
-	//ofstream a("test.csv");
-	//a << header;
-	cout<<"X TEST: " << coords.at(0)[0]<<endl;
 	if (supressOutput){
 		cout <<endl<< "OUTPUT SUPRESSED"<<endl<<endl;
 	}
