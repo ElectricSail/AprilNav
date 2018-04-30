@@ -12,6 +12,8 @@ navigation and localization. Matrices (or 2D barcodes) mounted on the ceiling of
 
 Our team at NASA - MSFC has adapted code (AprilTags) originally created by Edward Olson at University of Michigan and adapted by additional authors at Carnegie Mellon and MIT under the LGPL 2.1 license. AprilTags outputs the location of multiple 2D barcodes located anywhere in 3D space. AprilNav expands upon the AprilTags library estimating the pose of a camera given known coordinates of unique tags. 
 
+AprilNav has been tested and run on MacOS 10.4, Ubuntu 12.04, and Rasbian.
+
 ### Prerequisites
 
 Install the following dependencies to run the program (The following was tested on Ubuntu 12.04 and Raspberry Pi running Raspian: 
@@ -42,6 +44,11 @@ After compiling, run with:
 
 ***Note: Be sure to specify he propper tag size using the -S flag. Display a list of additional customizations using the -h flag
 
+## Authors
+
+* **Tristan Schuler** - *NASA MSFC* 
+* **Greta Studier** - *NASA MSFC* 
+
 ## Project History
 
 AprilTags were developed by Professor Edwin Olson of the University of
@@ -65,8 +72,3 @@ todo:
 - replacing arctan2 by precomputed lookup table
 - converting matrix operations to Eigen (mostly for simplifying code,
   maybe some speedup)
-  
-  ## Authors
-
-* **Tristan Schuler** - *NASA MSFC* 
-* **Greta Studier** - *NASA MSFC* 
