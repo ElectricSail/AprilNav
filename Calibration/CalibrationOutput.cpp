@@ -1,22 +1,7 @@
 //
-//  main.cpp
-//  TestCalibration
-//
 //  Created by Greta Studier on 2/20/18.
-//  Copyright © 2018 Greta Studier. All rights reserved.
 //
-/*
- Gucci for black camera on pi:
- [712.3569356101527, 0, 320.3506904372541;
- 0, 664.8499666468488, 248.0466493007159;
- 0, 0, 1]
- [-0.3650007185118307, -0.08256361261458915, -0.002138937839550542, -0.006064527080443616, 0.5223015320119493]
 
- My Webcam:
- [0.9858043200721776, 58.37314737496447, 0.000890380937589476, -0.01440380191495337, 0.3703751612149476][4033.815885202904, 0, 634.1807171926924;
- 0, 3105.07351107567, 347.0902196076579;
- 0, 0, 1]
- */
 #include <sstream>
 #include <stdio.h>
 #include <opencv2/calib3d/calib3d.hpp>
@@ -35,7 +20,7 @@ int main() {
     
     Mat intrinsic = Mat(3, 3, CV_32FC1);
     
-    //my camera
+    //my webcam
       intrinsic.ptr<float>(0)[0] = 4033.815885202904;
       intrinsic.ptr<float>(0)[1] = 0;
       intrinsic.ptr<float>(0)[2] = 634.1807171926924;
@@ -59,7 +44,7 @@ int main() {
     
     Mat distCoeffs = Mat(1, 5, CV_32FC1);
     
-    //My camera:
+    //My webcam:
     distCoeffs.ptr<float>(0)[0] = 0.9858043200721776;
     distCoeffs.ptr<float>(0)[1] = 58.37314737496447;
     distCoeffs.ptr<float>(0)[2] = 0.000890380937589476;
