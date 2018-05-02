@@ -11,6 +11,11 @@
  * Originally written by:
  *  Davis Hunter - 12/14/2017
  *  Davis.Hunter@uah.edu
+ *  
+ * Adapted by:
+ *  Tristan Schuler & Greta Studier - 5/2/18
+ *  tkschuler@yahoo.com
+ *  gretastudier@yahoo.com
  */
 
 #include <SPI.h>
@@ -171,6 +176,7 @@ void func(char incoming) {              // Interpreting inputs
 }
 
 void func2(char incoming2) {              // Interpreting inputs
+  //Serial.println(incoming2);
   switch (incoming2) {
       case 'n':                             // Null case
         Serial.println(incoming2);            //print in arduino
@@ -493,3 +499,10 @@ void parseInput(char c){
       readString += c; //makes the string readString
     }
   } 
+
+
+
+
+
+
+

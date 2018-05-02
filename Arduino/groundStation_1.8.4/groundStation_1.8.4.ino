@@ -12,6 +12,7 @@
 bool turnStateNew = false;               // Switch states
 bool turnStateOld = false;
 bool pulseState = true;
+bool pulseState_NEW = true;
 bool laserStateNew = false;
 bool laserStateOld = false;
 bool recordStateNew = false;
@@ -19,6 +20,7 @@ bool recordStateOld = false;
 bool thrustState = false;
 bool pSwitch = true;
 bool var = false;
+
 unsigned long milNewC = 1;
 unsigned long milOldC = 0;
 unsigned long milNewP = 1;
@@ -37,6 +39,12 @@ int zVal;
 int xValO;
 int yValO;
 int zValO;
+int Port42;
+int Port44;
+int Port46;
+int Port48;
+int Port50;
+int Port52;
 bool butn;
 bool butnO;
 
@@ -57,6 +65,15 @@ void setup() {
   pinMode(A14,INPUT);                      // Y-axis
   pinMode(A13,INPUT_PULLUP);               // Button
   pinMode(A12,INPUT);                      // Z-axis
+
+                                                 // These are the new controller ports
+  pinMode(42,INPUT_PULLUP);                      // r
+  pinMode(44,INPUT_PULLUP);                      // w
+  pinMode(46,INPUT_PULLUP);                      // b
+  pinMode(48,INPUT_PULLUP);                      // l 
+  pinMode(50,INPUT_PULLUP);                      // c
+  pinMode(52,INPUT_PULLUP);                      // f
+  
                                            // The following labels are:   (LED/WIRE)
   pinMode(22,INPUT_PULLUP);                // Reposition brake switch     (PRP/WHT)
   pinMode(24,INPUT_PULLUP);                // Recording data switch       (BLU/BLU)
@@ -67,15 +84,15 @@ void setup() {
   laserStateNew = digitalRead(28);
   recordStateNew = digitalRead(24);
 
-  readStick();
+  //stickPulse_NEW();
 }
 
 void loop() {
   states();
   if (pulseState) {
-    stickPulse();
+    stickPulse_NEW();
   } else {
-    stickConst();
+    stickConst_NEW();
   }
 
   if (Serial2.available()) {
@@ -92,8 +109,37 @@ void states() {                            // This is used for general refreshin
   laserStateOld = laserStateNew;
   laserStateNew = digitalRead(26); 
   pulseState = digitalRead(28);
-
-  if (pulseState) {                        // Used to differentiate between constant/single pulse modes
+  Port42 = digitalRead(42);
+  Port44 = digitalRead(44);
+  Port46 = digitalRead(46);
+  Port48 = digitalRead(48);
+  Port50 = digitalRead(50);
+  Port52 = digitalRead(52);
+  
+  
+  ///////////////////////////////////////////////
+   if (Port42==0) {                        // Port 42 on Arduino, for remote control  
+     Serial.println("Left Brown");               //Left Brown
+   } 
+     if (Port44==0) {                        // Port 44 on Arduino, for remote control 
+     Serial.println("CW Yellow");                  //CW Yellow
+     }
+     if (Port46==0) {                        // Port 46 on Arduino, for remote control 
+     Serial.println("Forward Blue");              //Forward Blue
+     }
+     if (Port48==0) {                        // Port 48 on Arduino, for remote control 
+     Serial.println("Right Red");            //Right Red                 
+   }
+     if (Port50==0) {                        // Port 50 on Arduino, for remote control 
+     Serial.println("CCW Green");                    //CCW Green
+   } 
+     if (Port52==0) {                        // Port 52 on Arduino, for remote control 
+     Serial.println("Back Black");                      //Back Black
+   } 
+  ////////////////////////////////////////////////
+   
+    
+    if (pulseState) {                        // Used to differentiate between constant/single pulse modes
     digitalWrite(25,HIGH);                 // Tied to the yellow LED on the breadboard, and the yellow switch
   } else {
     digitalWrite(25,LOW);
@@ -102,12 +148,10 @@ void states() {                            // This is used for general refreshin
   if (turnStateOld != turnStateNew) {      // Used to turn the tether brake backward
     if (turnStateNew) {
       Serial1.print('r');
-      Serial.print("what?");
       delay(2);
       digitalWrite(23,HIGH);
     } else {
       Serial1.print('s');
-      Serial.print("The FUck?");
       delay(2);
       digitalWrite(23,LOW);
     }
@@ -152,11 +196,8 @@ void readStick() {                         // Used to read the current input fro
    *  Z: 15 - 400
    */
 
-  if (!butn && butnO != butn){
+  if (!butn && butnO != butn)
     Serial1.print('b');
-    Serial.print("FIREEEEE!!!!!!\n");
-  }
-  
   
   if (xRaw < 250) {                        // Set xVal = -1 for left tilt
     xVal = -1;
@@ -182,6 +223,7 @@ void readStick() {                         // Used to read the current input fro
     zVal = 0;                              // Set zVal = 0 for no rotation
   }
 }
+
 
 void stickPulse() {                        // Thrusting with single pulses
   readStick();                             // The stick has to go back to the neutral position before sending another pulse command
@@ -220,6 +262,45 @@ void stickPulse() {                        // Thrusting with single pulses
   }
 }
 
+
+
+void stickPulse_NEW() {                        // Thrusting with single pulses
+  //readStick();                             // The stick has to go back to the neutral position before sending another pulse command
+  milNewP = millis();
+
+  if (Port42 == 1 && Port44 == 1 && Port46 == 1 && Port48 == 1 && Port50 == 1 && Port52 == 1){
+    pSwitch = true;}
+  
+  if (milNewP - milOldP >= pDelay && pSwitch) {
+    milOldP = milNewP;
+    if (Port42 == 0) {
+      Serial2.print('r');
+      delay(1);
+      pSwitch = false;
+    } else if (Port44 == 0) {
+      Serial2.print('w');
+      delay(1);
+      pSwitch = false;
+    } else if (Port46 == 0) {
+      Serial2.print('b');
+      delay(1);
+      pSwitch = false;
+    } else if (Port48 == 0) {
+      Serial2.print('l');
+      delay(1);
+      pSwitch = false;
+    } else if (Port50 == 0) {
+      Serial2.print('c');
+      delay(1);
+      pSwitch = false;
+    } else if (Port52 == 0) {
+      Serial2.print('f');
+      delay(1);
+      pSwitch = false;
+    }
+  }
+}
+
 void stickConst() {                      // Thrusting with constant pulses
   readStick();
   milNewC = millis();
@@ -227,27 +308,49 @@ void stickConst() {                      // Thrusting with constant pulses
   if (milNewC - milOldC >= thrustDelay) {
     if (xVal == 1) {
       Serial2.print('r');
-      Serial.print("LEFT\n");
       delay(1);
     } else if (xVal == -1) {
       Serial2.print('l');
-      Serial.print("RIGHT\n");
       delay(1);
     } else if (yVal == 1) {
       Serial2.print('f');
-      Serial.print("Back\n");
       delay(1);
     } else if (yVal == -1) {
       Serial2.print('b');
-      Serial.print("Forward\n");
       delay(1);
     } else if (zVal == 1) {
       Serial2.print('c');
-      Serial.print("Counter Clockwise\n");
       delay(1);
     } else if (zVal == -1) {
       Serial2.print('w');
-      Serial.print("CCW\n");
+      delay(1);
+    }
+    milOldC = milNewC;
+  }
+}
+
+void stickConst_NEW() {                      // Thrusting with constant pulses
+  readStick();
+  milNewC = millis();
+
+  if (milNewC - milOldC >= thrustDelay) {
+    if (Port42 == 0) {
+      Serial2.print('r');
+      delay(1);
+    } else if (Port44 == 0) {
+      Serial2.print('w');
+      delay(1);
+    } else if (Port46 == 0) {
+      Serial2.print('b');
+      delay(1);
+    } else if (Port48 == 0) {
+      Serial2.print('l');
+      delay(1);
+    } else if(Port50 == 0) {
+      Serial2.print('c');
+      delay(1);
+    } else if (Port52 == 0) {
+      Serial2.print('f');
       delay(1);
     }
     milOldC = milNewC;
