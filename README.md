@@ -51,7 +51,7 @@ After compiling, run with:
 
 ## Project History
 
-AprilTags were developed by Professor Edwin Olson of the University of
+AprilTags was developed by Professor Edwin Olson of the University of
 Michigan.  His Java implementation is available on this web site:
   http://april.eecs.umich.edu.
 
